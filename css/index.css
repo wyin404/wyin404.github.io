@@ -5840,6 +5840,12 @@ figure.highlight pre .javascript .function {
 #waline-wrap .wl-comment-actions > button:not(last-child) {
   padding-right: 4px;
 }
+#waline-wrap textarea {
+  background: url("https://unpkg.com/@waline/client@v3/dist/waline.css") 100% 100% no-repeat;
+}
+#waline-wrap textarea:focus {
+  background-image: none;
+}
 .twikoo .tk-content p {
   margin: 3px 0;
 }
