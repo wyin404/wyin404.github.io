@@ -3,7 +3,7 @@
   'use strict';
 
   // 1. 获取保存的字体偏好
-  let currentFont = localStorage.getItem('butterfly_font') || 'default';
+  let currentFont = localStorage.getItem('butterfly_font') || 'custom';
 
   // 2. 字体映射表
   const fontMap = {
