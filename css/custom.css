@@ -28,3 +28,8 @@
     src: url(/font/YShiWritten-Regular.ttf);
     font-weight: 900 !important;
 }
+
+#avatar-img:hover {
+  transform: none !important;
+  transition: none !important;
+}
