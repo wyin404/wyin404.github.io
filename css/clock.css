@@ -29,10 +29,10 @@
 }
 
 #clock-time {
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 700;
   font-family: "Courier New", Consolas, monospace;
-  letter-spacing: 6px;
+  letter-spacing: 5px;
   line-height: 1.3;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
 }
