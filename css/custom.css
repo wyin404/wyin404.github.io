@@ -106,3 +106,59 @@
 [data-theme="dark"] #sidebar #sidebar-menus .menus_items .site-page {
   text-shadow: 0 0 1px var(--theme-color) !important;
 }
+
+* {
+  color: #fff !important;
+}
+
+/* 如果文章容器还有子元素背景也要覆盖 */
+#article-container,
+#post,
+.post-content,
+.entry-content {
+  background: #1a1a1a !important;
+}
+/* ===== 主页文章 ===== */
+.recent-post-item {
+  background: #000000 !important;
+  border: 1px solid #333 !important;  /* 加个灰色边框让卡片有层次 */
+}
+/* ===== 强制主页文章标题白色 ===== */
+#recent-posts .recent-post-item > .recent-post-info > .article-title {
+  color: #FFF !important;
+}
+
+/* ===== 强制主页文章预览内容白色 ===== */
+#recent-posts .recent-post-item > .recent-post-info > .content {
+  color: #FFF !important;
+}
+/* Waline 评论区 */
+.wl-nick,
+.wl-mail,
+.wl-link,
+.wl-wditor,
+.wl-panel,
+.wl-os,
+.wl-browser,
+.wl-wrap,
+.wl-content,
+.wl-card,
+.wl-comment {
+  background: #1a1a1a !important;
+}
+
+.wl-wrap * {
+  color: #FFF !important;
+}
+
+.wl-input,
+.wl-textarea {
+  background: #1a1a1a !important;
+  color: #FFF !important;
+  border-color: #444 !important;
+}
+
+.wl-btn {
+  background: #333 !important;
+  color: #FFF !important;
+}

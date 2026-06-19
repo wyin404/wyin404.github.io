@@ -36,15 +36,10 @@
   }
 
   if (!insertClock()) {
-    // 如果侧边栏还没加载，等DOM加载完再试
-    document.addEventListener('DOMContentLoaded', function() {
-      if (!insertClock()) {
-        // 实在找不到侧边栏，就追加到 body（兜底）
-        document.body.appendChild(container);
-      }
-    });
-  }
-
+      (function() {
+         startClock(); // 直接运行，不等任何事件
+      })();
+    }
   // ---------- 时钟更新逻辑 ----------
   var dateDisplay = document.getElementById('clock-date');
   var timeDisplay = document.getElementById('clock-time');
