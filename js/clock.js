@@ -1,13 +1,11 @@
 (function() {
   'use strict';
 
-  // ---------- 创建HTML容器（使用更安全的方式） ----------
+  // ---------- 创建HTML容器 ----------
   var container = document.createElement('div');
-  // 用 classList.add 替代 className 赋值，避免空值问题
   container.classList.add('card-widget');
   container.id = 'clock-card';
 
-  // 创建内部结构
   var content = document.createElement('div');
   content.className = 'card-content';
 
@@ -24,29 +22,24 @@
   content.appendChild(display);
   container.appendChild(content);
 
-  // ---------- 插入到侧边栏 ----------
+  // ---------- 插入到侧边栏（改进版） ----------
   function insertClock() {
     var sidebar = document.querySelector('.aside-content');
     if (sidebar) {
-      // 插入到第一个子元素之前
       sidebar.insertBefore(container, sidebar.firstChild);
       return true;
     }
     return false;
   }
 
-  if (!insertClock()) {
-      (function() {
-         startClock(); // 直接运行，不等任何事件
-      })();
-    }
   // ---------- 时钟更新逻辑 ----------
-  var dateDisplay = document.getElementById('clock-date');
-  var timeDisplay = document.getElementById('clock-time');
   var weekDays = ['日', '一', '二', '三', '四', '五', '六'];
 
   function updateClock() {
+    var dateDisplay = document.getElementById('clock-date');
+    var timeDisplay = document.getElementById('clock-time');
     if (!dateDisplay || !timeDisplay) return;
+
     var now = new Date();
     var year = now.getFullYear();
     var month = String(now.getMonth() + 1).padStart(2, '0');
@@ -60,9 +53,36 @@
     timeDisplay.textContent = hours + ':' + minutes + ':' + seconds;
   }
 
-  // 初始更新
-  updateClock();
-  // 每秒更新
-  setInterval(updateClock, 1000);
+  // ---------- 核心：插入 + 启动 ----------
+  function initClock() {
+    // 如果插入成功，直接启动
+    if (insertClock()) {
+      updateClock();
+      setInterval(updateClock, 1000);
+      return;
+    }
+
+    // 插入失败 → 用 MutationObserver 监听侧边栏出现
+    var observer = new MutationObserver(function() {
+      if (insertClock()) {
+        updateClock();
+        setInterval(updateClock, 1000);
+        observer.disconnect(); // 成功后停止监听
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // 保险：3秒后如果还没成功，强制再试一次
+    setTimeout(function() {
+      if (!document.getElementById('clock-card')) {
+        insertClock();
+        updateClock();
+        setInterval(updateClock, 1000);
+      }
+    }, 3000);
+  }
+
+  // 启动
+  initClock();
 
 })();
