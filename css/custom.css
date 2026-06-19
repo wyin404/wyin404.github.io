@@ -111,6 +111,7 @@
   color: #fff !important;
 }
 
+
 /* 如果文章容器还有子元素背景也要覆盖 */
 #article-container,
 #post,
@@ -132,7 +133,15 @@
 #recent-posts .recent-post-item > .recent-post-info > .content {
   color: #FFF !important;
 }
+
+/* 链接颜色 */
+/* ===== 文章内链接颜色（只限文章内容区） ===== */
+#article-container a,
+#article-container a * {
+  color: #8ab4f8 !important;
+}
 /* Waline 评论区 */
+.open,
 .wl-nick,
 .wl-mail,
 .wl-link,
@@ -161,4 +170,51 @@
 .wl-btn {
   background: #333 !important;
   color: #FFF !important;
+}
+/* 音乐 */
+.aplayer-info {
+  background: #1a1a1a !important;
+}
+#page {
+  background-color: #1a1a1a !important;
+}
+/* ===== 菜单背景：PC 端透明 ===== */
+.menus_items {
+  background: transparent !important;
+}
+
+/* ===== 菜单背景：手机端黑色 ===== */
+@media screen and (max-width: 768px) {
+  .menus_items {
+    background: #1f1f1f !important;
+  }
+}
+.menus_item_child li a {
+  background: #1f1f1f !important;
+}
+/* 禁用首页文章卡片图片的悬停放大动效 */
+.recent-post-item .post_cover .post_thumb img:hover {
+    transform: none !important;
+    transition: none !important;
+    overflow: visible !important;
+}
+/* 锁死所有文章卡片内的动画、变换、过渡 */
+.recent-post-item,
+.recent-post-item *,
+.recent-post-item *::before,
+.recent-post-item *::after {
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-iteration-count: 0 !important;
+}
+
+/* 特别针对封面区域，强制保持原始尺寸 */
+.recent-post-item .post_cover,
+.recent-post-item .post_thumb,
+.recent-post-item .post_cover img {
+  transform: scale(1) !important;
+  transition: none !important;
+  will-change: auto !important;
 }
