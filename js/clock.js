@@ -1,88 +1,54 @@
 (function() {
   'use strict';
 
-  // ---------- 创建HTML容器 ----------
-  var container = document.createElement('div');
-  container.classList.add('card-widget');
-  container.id = 'clock-card';
+  function pad(n) {
+    return String(n).padStart(2, '0');
+  }
 
-  var content = document.createElement('div');
-  content.className = 'card-content';
+  var weekDays = ['日', '一', '二', '三', '四', '五', '六'];
 
-  var display = document.createElement('div');
-  display.id = 'clock-display';
+  function updateClockDisplay() {
+    var dateEl = document.getElementById('clock-date');
+    var timeEl = document.getElementById('clock-time');
+    if (!dateEl || !timeEl) return;
 
-  var dateEl = document.createElement('div');
-  dateEl.id = 'clock-date';
-  var timeEl = document.createElement('div');
-  timeEl.id = 'clock-time';
+    var now = new Date();
+    dateEl.textContent = now.getFullYear() + '年' + pad(now.getMonth() + 1) + '月' + pad(now.getDate()) + '日 星期' + weekDays[now.getDay()];
+    timeEl.textContent = pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
+  }
 
-  display.appendChild(dateEl);
-  display.appendChild(timeEl);
-  content.appendChild(display);
-  container.appendChild(content);
+  function createClock() {
+    // 移除旧时钟（避免重复）
+    var oldClock = document.getElementById('clock-card');
+    if (oldClock) oldClock.remove();
 
-  // ---------- 插入到侧边栏（改进版） ----------
-  function insertClock() {
+    // 创建容器
+    var container = document.createElement('div');
+    container.classList.add('card-widget');
+    container.id = 'clock-card';
+    container.style.cssText = 'padding: 15px 20px; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: #fff;';
+
+    container.innerHTML = `
+      <div style="font-size: 14px; opacity: 0.9; margin-bottom: 4px;" id="clock-date">----年--月--日 星期-</div>
+      <div style="font-size: 32px; font-weight: 700; font-family: 'Courier New', monospace; letter-spacing: 3px; text-shadow: 0 2px 8px rgba(0,0,0,0.2);" id="clock-time">--:--:--</div>
+    `;
+
     var sidebar = document.querySelector('.aside-content');
     if (sidebar) {
       sidebar.insertBefore(container, sidebar.firstChild);
-      return true;
+      updateClockDisplay();
+      if (window.clockInterval) clearInterval(window.clockInterval);
+      window.clockInterval = setInterval(updateClockDisplay, 1000);
     }
-    return false;
   }
 
-  // ---------- 时钟更新逻辑 ----------
-  var weekDays = ['日', '一', '二', '三', '四', '五', '六'];
-
-  function updateClock() {
-    var dateDisplay = document.getElementById('clock-date');
-    var timeDisplay = document.getElementById('clock-time');
-    if (!dateDisplay || !timeDisplay) return;
-
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = String(now.getMonth() + 1).padStart(2, '0');
-    var day = String(now.getDate()).padStart(2, '0');
-    var week = weekDays[now.getDay()];
-    var hours = String(now.getHours()).padStart(2, '0');
-    var minutes = String(now.getMinutes()).padStart(2, '0');
-    var seconds = String(now.getSeconds()).padStart(2, '0');
-
-    dateDisplay.textContent = year + '-' + month + '-' + day + ' 星期' + week;
-    timeDisplay.textContent = hours + ':' + minutes + ':' + seconds;
+  // 页面首次加载
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', createClock);
+  } else {
+    createClock();
   }
 
-  // ---------- 核心：插入 + 启动 ----------
-  function initClock() {
-    // 如果插入成功，直接启动
-    if (insertClock()) {
-      updateClock();
-      setInterval(updateClock, 1000);
-      return;
-    }
-
-    // 插入失败 → 用 MutationObserver 监听侧边栏出现
-    var observer = new MutationObserver(function() {
-      if (insertClock()) {
-        updateClock();
-        setInterval(updateClock, 1000);
-        observer.disconnect(); // 成功后停止监听
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // 保险：3秒后如果还没成功，强制再试一次
-    setTimeout(function() {
-      if (!document.getElementById('clock-card')) {
-        insertClock();
-        updateClock();
-        setInterval(updateClock, 1000);
-      }
-    }, 3000);
-  }
-
-  // 启动
-  initClock();
-
+  // 🔑 关键：PJAX 切换后重新创建
+  document.addEventListener('pjax:complete', createClock);
 })();
