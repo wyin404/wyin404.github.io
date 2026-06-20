@@ -97,28 +97,11 @@
   left: -90px;
 }
 
-/* wordlight effect */
-[data-theme="dark"] #nav .site-page,
-[data-theme="dark"] #nav .menus_items .menus_item .menus_item_child li a {
-  text-shadow: 0 0 1px var(--theme-color) !important;
-}
 /* 手机适配 */
 [data-theme="dark"] #sidebar #sidebar-menus .menus_items .site-page {
   text-shadow: 0 0 1px var(--theme-color) !important;
 }
 
-* {
-  color: #fff !important;
-}
-
-
-/* 如果文章容器还有子元素背景也要覆盖 */
-#article-container,
-#post,
-.post-content,
-.entry-content {
-  background: #1a1a1a !important;
-}
 /* ===== 主页文章 ===== */
 .recent-post-item {
   background: #000000 !important;
@@ -140,44 +123,6 @@
 #article-container a * {
   color: #8ab4f8 !important;
 }
-/* Waline 评论区 */
-.open,
-.wl-nick,
-.wl-mail,
-.wl-link,
-.wl-wditor,
-.wl-panel,
-.wl-os,
-.wl-browser,
-.wl-wrap,
-.wl-content,
-.wl-card,
-.wl-comment {
-  background: #1a1a1a !important;
-}
-
-.wl-wrap * {
-  color: #FFF !important;
-}
-
-.wl-input,
-.wl-textarea {
-  background: #1a1a1a !important;
-  color: #FFF !important;
-  border-color: #444 !important;
-}
-
-.wl-btn {
-  background: #333 !important;
-  color: #FFF !important;
-}
-/* 音乐 */
-.aplayer-info {
-  background: #1a1a1a !important;
-}
-#page {
-  background-color: #1a1a1a !important;
-}
 /* ===== 菜单背景：PC 端透明 ===== */
 .menus_items {
   background: transparent !important;
@@ -186,30 +131,15 @@
 /* ===== 菜单背景：手机端黑色 ===== */
 @media screen and (max-width: 768px) {
   .menus_items {
-    background: #1f1f1f !important;
+    background: #ffffff !important;
   }
 }
 .menus_item_child li a {
   background: #1f1f1f !important;
 }
-/* 禁用首页文章卡片图片的悬停放大动效 */
-.recent-post-item .post_cover .post_thumb img:hover {
-    transform: none !important;
-    transition: none !important;
-    overflow: visible !important;
+.menus_item_child li a * {
+  color: #FFF !important;
 }
-/* 锁死所有文章卡片内的动画、变换、过渡 */
-.recent-post-item,
-.recent-post-item *,
-.recent-post-item *::before,
-.recent-post-item *::after {
-  transform: none !important;
-  transition: none !important;
-  animation: none !important;
-  animation-duration: 0s !important;
-  animation-iteration-count: 0 !important;
-}
-
 /* 特别针对封面区域，强制保持原始尺寸 */
 .recent-post-item .post_cover,
 .recent-post-item .post_thumb,
@@ -217,4 +147,45 @@
   transform: scale(1) !important;
   transition: none !important;
   will-change: auto !important;
+}
+
+/* ===== 主页侧边栏所有文字强制白色 ===== */
+.sidebar *,
+.card-info *,
+.card-tags *,
+.card-categories *,
+.card-archives *,
+.card-recent-post * {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏链接也要白色（覆盖默认蓝色） ===== */
+.sidebar a,
+.sidebar a * {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏标题 ===== */
+.sidebar .widget-title,
+.card-info .author-info__name,
+.card-info .author-info__description {
+  color: #FFF !important;
+}
+/* ===== 侧边栏时钟日期 ===== */
+#clock-date {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏时钟时间 ===== */
+#clock-time {
+  color: #FFF !important;
+}
+/* ===== 侧边栏网站信息标题 ===== */
+.item-headline {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏网站信息所有文字 ===== */
+.webinfo * {
+  color: #FFF !important;
 }
