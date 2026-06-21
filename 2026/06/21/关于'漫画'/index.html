@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>关于'漫画' | 你好！</title><meta name="author" content="wyin404"><meta name="copyright" content="wyin404"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="请输入邀请码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于&#39;漫画&#39;">
+<meta property="og:url" content="https://wyin5100.top/2026/06/21/%E5%85%B3%E4%BA%8E'%E6%BC%AB%E7%94%BB'/index.html">
+<meta property="og:site_name" content="你好！">
+<meta property="og:description" content="请输入邀请码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&r=G&d=mp&ver=1781862365">
+<meta property="article:published_time" content="2026-06-21T09:27:58.000Z">
+<meta property="article:modified_time" content="2026-06-21T09:59:06.003Z">
+<meta property="article:author" content="wyin404">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&r=G&d=mp&ver=1781862365"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "关于'漫画'",
+  "url": "https://wyin5100.top/2026/06/21/%E5%85%B3%E4%BA%8E'%E6%BC%AB%E7%94%BB'/",
+  "image": "https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&r=G&d=mp&ver=1781862365",
+  "datePublished": "2026-06-21T09:27:58.000Z",
+  "dateModified": "2026-06-21T09:59:06.003Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wyin404",
+      "url": "https://wyin5100.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/live.png"><link rel="canonical" href="https://wyin5100.top/2026/06/21/%E5%85%B3%E4%BA%8E'%E6%BC%AB%E7%94%BB'/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '关于\'漫画\'',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/clock.css"><link rel="stylesheet" href="/css/glass.css"><style>.article-title { color: #FFF !important; }
+.content { color: #FFF !important; }
+.recent-post-item * { color: #FFF !important; }</style><!-- hexo injector head_end start -->
+    <link rel="stylesheet" href="/css/gallery.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+btf.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+
+</script><link rel="stylesheet" href="/css/center-simple.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div class="bg-animation" id="web_bg" style="background-image: url(/images/background.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&amp;r=G&amp;d=mp&amp;ver=1781862365" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">你好！</span></a><a class="nav-page-title" href="/"><span class="site-name">关于'漫画'</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">关于'漫画'</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-21T09:27:58.000Z" title="发表于 2026-06-21 17:27:58">2026-06-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-21T09:59:06.003Z" title="更新于 2026-06-21 17:59:06">2026-06-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>17 mins.分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/06/21/%E5%85%B3%E4%BA%8E'%E6%BC%AB%E7%94%BB'/#post-comment"><span class="waline-comment-count" data-path="/2026/06/21/%E5%85%B3%E4%BA%8E'%E6%BC%AB%E7%94%BB'/"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><div class="hbe hbe-container" id="hexo-blog-encrypt"
+     data-hbe-format="4"
+     data-wpm="Oh, this is an invalid password. Check and try again, please."
+     data-whm="Oh, this is an invalid password. Check and try again, please."
+     data-salt="567a283d9032a661b60d758b0c41743053ebd142c18ca01fdc8a797bd8a6e820"
+     data-nonce="088e9a373b70c973669f87ce"
+     data-kdf-iterations="250000"
+     data-auto-save="false">
+  <script id="hbeData" type="hbeData">
+    2f910d384d5439643335780e3823f08f24efe075619b750d54d50139044f9b4c4672b2ac0e8213524103bead7faf1d52acaa2b57f72bbf42b5ee70d97e2000e5d501bc40b0bb712179c44979585bcc8e52372dd84d581b37881a245bab892fed09ea6219d4bc66fd18c5fcf7efc5094624b40eae68cb9b154a223acc7912d2c550189065c7bdb28abf6f30558ee12be2de6dc7ea5a8b99b9b4afe4ff1771d16f3c79117c4e8f23d52c874846723f188e17e206a55e3ca957a71f66f20ca5dc2acd772f1c21a4b53eb1a13716abb1f675ec176b3fbc2496e6a00f70119c8a107076ef6826ce17153cf5804ac44e2797cef39103dc090addca102e08a505db92ad64d7cae0c945a9b3a9b2beb922bbb160d3d8fad0bcbe1f6f082537e1822afa01ca748b775ccb8f3027e5ce4c8d8804f74f4e48b943a09432a58efb70e7669b5e12bc86e27c8bc7a26aec88d9c615f42520c58c2833001df0dfe3370a703e444d9ce4c66cccac1539d390738ef113f15d5aba6149826b8021ba2595e7899a87cbea3fc687d5828dda84aec5dfd926abf5445a09d01da4aae80c2365a024e5491f98b747a8743c73e3a98d5ec725b28ce72067a0e4659d5214326847b63d60370282bc9cc1bce7cf96236501dea92a89152dc45bfe3e064eb741e25ec2173606a1068cc0ec8e79902358e3abd3b332557535787cfcf049fc945c105c50ef09489126f1e01dd0a0a4ed1e0e6b79760ba93281342c648e2a5a59cc21784c7b21418c8061e3f60395cf0e3f06541fd0f80453af8d92a2d96473c9582ac2d041e07d9f70a00c2fc174e7e5697b96eaeb02ef3902a6ee906458a0e824e623c61ad40ee8b85e5218ab1448bd2b9ebbfe4d21a7fb5a330b8c1c36a984dd740d79b4e5b85d0561e68c1a9b833f3dba10c91a1beb7bf0b0db314aad61d02fd097ba17ed2a3ce5072688d6399c4747c64c322a357a638fff1856e08a5e95ccb71a850c33e15b5a4e3c70fe7b73d913b1a4376fa1e9b63e27c072e76ada204d303e703dd328f61acd89f0b7d4d880a9cc1aca376e084fb5fdfb70541291f70ad0db9a0c35b7b0baf153bb3d6ef107f806ba03b350008aadc270ba4aa8b9f62b0cd3f43c4f64d961b86255af95970bd3aeff59310c35004838e997760224a03f849d4b634dc6fa442be05b87459d131603cb014dab0fdfa163c8271bdc3d2dd439192b7c12e0c7efdb78ab0f30208a614843b25ac3c431c6fcabed7804e0ec6ca7f2af2544c792ad35cd2abe6429f4c571ea4d77ed54542b066a53f0169790039e6b9c97b2cb47fd60016f40bda2313308ebeb381e1cca63de3fc155a95af26e29ecffe16cc03648dbead79e2b5e235d95c6131229f4f0a4d93c96e6570165a0f509bf9d268bbf097493a5d945649b0328ffd79e909e43144def70278f7d00e7c5116976ff84e86374fd8a78c007afc6479b1ad24c533a4e416fb67aec3d6dc95c2730b327c8fa1f6d613e8e3101859cd8bed80edfdf62b2dbc8f93e9478d8cbacd20df27b50f1e70c74867da28b64b5f97ec4a5c5d66caaf15f9a1a8506e73a3c04509542240957b5f4fc5d0ceb32bf6eeada3b8c134298796fe832291a0baa90585b0050aad0bd932e570007273ea86187ffcf586a83da85fc9a704aeaeb08fb21228c2559be2f989b2e137776be00974c1bcb660891dc21e67ad94ce16d9edb1ebc88a20e8a74f4f33c17a82598ae1a8075b19be8c4b1d13a4bdcd4acd4c6c6c788e7a33522338037d10669e9f2fcef0e9bd3bb77109124e73a9b370f7b2fbd902c2ba9f39001d214834c26be41fd6e677ad7ca56b2649c09a95fcc0a983fb34ba71b87633cf3f58aa5ae935eb0614bd79007bc90bc0a0e3dd71c62d2b3d7e4c069c81cf8122155a260996187df9cc1d359b1556d48db3c00dcd1d08c32021e25cf0ad861cdc59e37579c585c812af0442b107fb6262f9a9dce3be46ef2d22db7e5d1f7bf391841026895ca730181238f339a121d9d36d2e268130c31132420b8d213ede41d68f839ca30de88f8abef772d5463071adaeed4d02bf00f777695b1da3a15b47b887d949daa870f3bc9080fd8ffac245589d4af8fe265ff9d9b2377e92f7e14d156169ee30f8e84e371a8b5a311cac1fcd0d6299fc4cdc67872a53eedee29774e73a7154007bef6899912fc7aa83f17bc48417624aeb296df2b98957bf2ce319b448cc05a541edf1207d8da2f9db7ecd4e37a8745d568bea3d34bfcedfef91b8d3a3c241a586c8bbac1f20b5a502f471061fd679d6927ed867824964d96d1ae3a9f01ba038111a442ec7e9d481a014ee2064d9b7678c5ede629fab87ad4fe803c0f36c84b79f5b91d1179db983e
+  </script>
+  <div class="hbe hbe-content">
+    <form id="hbeForm" class="hbe hbe-form" onsubmit="return false">
+      <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">邀请码...</span>
+      </label>
+    </div>
+      <button class="hbe hbe-button" type="submit">Decrypt</button>
+      <div class="hbe hbe-error" role="alert" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.9e70f1e1d2.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></article><div class="tag_share"><div class="post-share"><div class="social-share" data-image="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&amp;r=G&amp;d=mp&amp;ver=1781862365" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content toc-div-class" style="display:none"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jm%E7%9A%84%E6%94%B6%E8%97%8F%E6%9D%A5%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text"> jm的收藏来源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#jm%E5%9B%9E%E5%AE%B6%E7%9A%84%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">jm回家的路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E4%B8%AA%E4%BA%BA%E6%8E%A8%E8%8D%90"><span class="toc-number">3.</span> <span class="toc-text">一些个人推荐</span></a></li></ol></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wyin404</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><!-- ===== 【插入点1】字体切换按钮放在隐藏设置里 =====--><!-- 这样字体按钮会出现在齿轮点击后的面板中--><div class="rightside-item"><a id="font-toggle-btn" title="字体切换"><i class="fas fa-font"></i></a></div><!-- ===== 字体选择面板（放在隐藏设置内部，随面板显示） =====--><div id="font-panel" style="display:none"><div class="font-option" data-font="default" onclick="setFont(&quot;default&quot;)"><span>默认</span><span class="font-sample">文a</span></div><div class="font-option" data-font="custom" onclick="setFont(&quot;custom&quot;)"><span>圆滑</span><span class="font-sample">文a</span></div></div></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = null
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://talk.wyin5100.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: true,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script src="/js/clock.js"></script><script src="/js/change.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+    <script src="/js/gallery.js" async></script>
+<div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__fadeIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '500ms');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__fadeIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
