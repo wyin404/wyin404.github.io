@@ -37,13 +37,13 @@
 /* 字体切换面板 */
 #font-panel {
   position: absolute;
-  bottom: 60px;
+  bottom: 40px;
   right: 0;
   background: var(--card-bg);
-  border-radius: 12px;
-  padding: 12px 16px;
+  border-radius: 16px;
+  padding: 16px 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  min-width: 140px;
+  min-width: 180px;
   z-index: 100;
   border: 1px solid var(--border-color);
 }
@@ -56,7 +56,7 @@
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
-  gap: 20px;
+  gap: 30px;
 }
 
 #font-panel .font-option:hover {
@@ -79,6 +79,7 @@
 .font-option[data-font="serif"] .font-sample {
   font-family: '圆滑', serif;
 }
+
 
 /* 一级菜单居中 */
 #nav .menus_items {
@@ -126,13 +127,6 @@
 /* ===== 菜单背景：PC 端透明 ===== */
 .menus_items {
   background: transparent !important;
-}
-
-/* ===== 菜单背景：手机端黑色 ===== */
-@media screen and (max-width: 768px) {
-  .menus_items {
-    background: #ffffff !important;
-  }
 }
 .menus_item_child li a {
   background: #1f1f1f !important;
