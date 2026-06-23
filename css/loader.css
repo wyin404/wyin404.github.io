@@ -1,0 +1,29 @@
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loader img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#loader.hidden {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+#body-wrap {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#body-wrap.show {
+  opacity: 1;
+}
