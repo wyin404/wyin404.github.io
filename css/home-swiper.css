@@ -1,0 +1,162 @@
+/* ===== 轮播容器 ===== */
+.my-swiper-wrapper {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.my-swiper-wrapper .container {
+  width: 100%;
+  height: auto;
+}
+
+.my-swiper-wrapper .carousel-container {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.5);
+}
+
+.my-swiper-wrapper .carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #0c0c14;
+}
+
+.my-swiper-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===== 导航按钮 ===== */
+.my-swiper-wrapper .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 200, 150, 0.2);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.my-swiper-wrapper .nav-btn:hover {
+  background: rgba(0, 200, 150, 0.15);
+  border-color: rgba(0, 200, 150, 0.5);
+  box-shadow: 0 0 20px rgba(0, 200, 150, 0.2);
+}
+
+.my-swiper-wrapper .nav-btn.prev {
+  left: 16px;
+}
+.my-swiper-wrapper .nav-btn.next {
+  right: 16px;
+}
+
+/* ===== 指示点 ===== */
+.my-swiper-wrapper .indicators {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.my-swiper-wrapper .indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.my-swiper-wrapper .indicator.active {
+  background: rgba(0, 220, 160, 0.9);
+  box-shadow: 0 0 8px rgba(0, 200, 150, 0.5);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ===== 移动端适配 ===== */
+@media (max-width: 768px) {
+  .my-swiper-wrapper .nav-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+  .my-swiper-wrapper .nav-btn.prev {
+    left: 8px;
+  }
+  .my-swiper-wrapper .nav-btn.next {
+    right: 8px;
+  }
+  .my-swiper-wrapper .indicator {
+    width: 6px;
+    height: 6px;
+  }
+  .my-swiper-wrapper .indicator.active {
+    width: 18px;
+  }
+}
+/* ===== 修复文章列表背景 ===== */
+.recent-posts {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+/* ===== 修复轮播宽度不一致 ===== */
+.my-swiper-wrapper {
+  padding: 0 !important;
+  margin: 0 auto 20px auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.my-swiper-wrapper .container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.my-swiper-wrapper .carousel-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.my-swiper-wrapper .carousel {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#canvas {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
