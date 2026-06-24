@@ -1,29 +1,37 @@
 (function () {
   const images = [
     {
-      src: "http://5b0988e595225.cdn.sohucs.com/images/20180130/24aecf0d680546ccbf6480badce389dc.jpeg",
-      alt: "千与千寻",
+      src: "/images/a.png",
+      alt: "a",
     },
     {
-      src: "https://pic3.zhimg.com/v2-f1159536dc58af663e3955e774a7a13a_r.jpg",
-      alt: "龙猫",
+      src: "/images/b.jpg",
+      alt: "b",
     },
     {
-      src: "http://qqpublic.qpic.cn/qq_public_cover/0/0-2083471255-1DB77954D274653D98B57D000A686040_vsmcut/0",
-      alt: "天空之城",
+      src: "/images/c.png",
+      alt: "c",
     },
     {
-      src: "http://5b0988e595225.cdn.sohucs.com/images/20180824/781646fe72fc4788b7dfc24c112b5bbb.png",
-      alt: "悬崖上的金鱼姬",
+      src: "/images/d.jpg",
+      alt: "d",
     },
     {
-      src: "http://p6.itc.cn/q_70/images03/20210106/6cd651a28f9a46268205410dcc5cad4d.jpeg",
-      alt: "魔女宅急便",
+      src: "/images/e.jpg",
+      alt: "e",
     },
     {
-      src: "https://x0.ifengimg.com/ucms/2024_13/88635184EFC2FFE43710A5DF199B7067DF336C0F_size489_w1000_h1423.jpg",
-      alt: "你想活出怎样的人生",
+      src: "/images/f.jpg",
+      alt: "f",
     },
+    {
+      src: "/images/g.jpg",
+      alt: "g",
+    },
+    {
+      src: "/images/h.jpg",
+      alt: "h",
+    }
   ];
 
   const canvas = document.getElementById("canvas");
@@ -230,7 +238,7 @@
 
   function startAutoPlay() {
     stopAutoPlay();
-    autoPlayTimer = setInterval(next, 4500);
+    autoPlayTimer = setInterval(next, 9000);
   }
 
   function stopAutoPlay() {
