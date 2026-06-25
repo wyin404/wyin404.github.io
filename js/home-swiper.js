@@ -1,11 +1,366 @@
-!function(){const t=[{src:"/images/a.jpg",alt:"a"},{src:"/images/b.jpg",alt:"b"},{src:"/images/c.png",alt:"c"},{src:"/images/d.jpg",alt:"d"},{src:"/images/e.jpg",alt:"e"},{src:"/images/f.jpg",alt:"f"},{src:"/images/g.jpg",alt:"g"},{src:"/images/h.jpg",alt:"h"},{src:"/images/i.jpg",alt:"i"},{src:"/images/j.jpg",alt:"j"},{src:"/images/k.jpg",alt:"k"},{src:"/images/l.jpg",alt:"l"},{src:"/images/m.jpg",alt:"m"},{src:"/images/n.jpg",alt:"n"},{src:"/images/o.jpg",alt:"o"}],e=document.getElementById("canvas"),a=e.getContext("2d"),n=document.getElementById("indicators");let i=0,l=!1,o=null,c=null;const r=[];function s(){
-// 获取 .my-swiper-wrapper 的宽度
-const t=document.querySelector(".my-swiper-wrapper"),n=document.querySelector(".carousel-container");if(!t||!n)return;const o=t.getBoundingClientRect().width,c=n.getBoundingClientRect().height;
-// Canvas 宽度 = wrapper 宽度，高度 = container 高度
-e.width=o*devicePixelRatio,e.height=c*devicePixelRatio,e.style.width=o+"px",e.style.height=c+"px",a.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0),!l&&r[i]&&d(r[i])}function d(t,n){const i=n||a,l=e.width/devicePixelRatio,o=e.height/devicePixelRatio;if(0===l||0===o)return;const c=l/o;let r,s,d,g;t.naturalWidth/t.naturalHeight>c?(g=t.naturalHeight,d=g*c,r=(t.naturalWidth-d)/2,s=0):(d=t.naturalWidth,g=d/c,r=0,s=(t.naturalHeight-g)/2),i.drawImage(t,r,s,d,g,0,0,l,o)}function g(t,n,i){const l=e.width/devicePixelRatio,o=e.height/devicePixelRatio,r=Math.ceil(l/6),s=Math.ceil(o/6),g=function(t){const a=e.width/devicePixelRatio,n=e.height/devicePixelRatio,i=document.createElement("canvas");i.width=a,i.height=n;const l=i.getContext("2d"),o=a/n;let c,r,s,d;return t.naturalWidth/t.naturalHeight>o?(d=t.naturalHeight,s=d*o,c=(t.naturalWidth-s)/2,r=0):(s=t.naturalWidth,d=s/o,c=0,r=(t.naturalHeight-d)/2),l.drawImage(t,c,r,s,d,0,0,a,n),l.getImageData(0,0,a,n)}(t),h=[];for(let t=0;t<r;t++){const e=.3*(Math.abs(t-r/2)/(r/2))+.15*Math.random();h.push({delay:e,speed:.8+.6*Math.random(),trail:3+Math.floor(5*Math.random())})}const m=[];for(let t=0;t<s;t++){m[t]=[];for(let e=0;e<r;e++){const a=Math.min(6*e+3,l-1),n=Math.min(6*t+3,o-1),i=4*(Math.floor(n)*Math.floor(l)+Math.floor(a));m[t][e]={r:g.data[i]||0,g:g.data[i+1]||0,b:g.data[i+2]||0,fallen:!1,y:6*t,vy:0,opacity:1}}}const u=performance.now();c=requestAnimationFrame(function t(e){const g=e-u,f=Math.min(g/2200,1);a.clearRect(0,0,l,o),a.globalAlpha=Math.min(1,2*f),d(n),a.globalAlpha=1;let y=!0;for(let t=0;t<r;t++){const e=h[t],n=Math.max(0,(f-e.delay)/(1-e.delay))*(s+e.trail);for(let i=0;i<s;i++){const l=m[i][t];if(i<n&&!l.fallen&&(l.fallen=!0,l.vy=2*e.speed),l.fallen){l.vy+=.35*e.speed,l.y+=l.vy;const n=l.y-6*i;if(l.opacity=Math.max(0,1-n/(.7*o)),l.y<o+6&&l.opacity>.01&&(y=!1,a.globalAlpha=l.opacity,a.fillStyle=`rgb(${l.r}, ${l.g}, ${l.b})`,a.fillRect(6*t,l.y,5.5,5.5),l.opacity>.3&&l.vy>3)){a.globalAlpha=.2*l.opacity,a.fillStyle=`rgb(${Math.min(255,l.r+80)}, ${Math.min(255,l.g+80)}, ${Math.min(255,l.b+80)})`;for(let e=1;e<=2;e++)a.fillRect(6*t,l.y-6*e*.8,5.5,5.5)}}else y=!1,a.globalAlpha=1,a.fillStyle=`rgb(${l.r}, ${l.g}, ${l.b})`,a.fillRect(6*t,l.y,5.5,5.5)}}a.globalAlpha=1,f<1||!y?c=requestAnimationFrame(t):(a.clearRect(0,0,l,o),d(n),i())})}function h(t){if(l||t===i)return;l=!0;const e=n.querySelectorAll(".indicator");e[i].classList.remove("active"),e[t].classList.add("active"),g(r[i],r[t],()=>{i=t,l=!1})}function m(){h((i+1)%t.length)}function u(){h((i-1+t.length)%t.length)}function f(){y(),o=setInterval(m,9e3)}function y(){o&&(clearInterval(o),o=null)}async function p(){
-// 等待 DOM 完全渲染
-await new Promise(t=>setTimeout(t,100)),s(),window.addEventListener("resize",s),t.forEach((t,e)=>{const a=document.createElement("button");a.className="indicator "+(0===e?"active":""),a.addEventListener("click",()=>h(e)),n.appendChild(a)}),await function(){let e=0;return new Promise(a=>{t.forEach((n,i)=>{const l=new Image;l.crossOrigin="anonymous",l.onload=()=>{r[i]=l,e++,e===t.length&&a()},l.onerror=()=>{const l=document.createElement("canvas");l.width=1920,l.height=1080;const o=l.getContext("2d"),c=o.createLinearGradient(0,0,1920,1080);c.addColorStop(0,`hsl(${60*i+140}, 50%, 25%)`),c.addColorStop(1,`hsl(${60*i+170}, 50%, 15%)`),o.fillStyle=c,o.fillRect(0,0,1920,1080),o.fillStyle="#fff",o.font="48px sans-serif",o.textAlign="center",o.fillText(n.alt,960,540),r[i]=l,e++,e===t.length&&a()},l.src=n.src})})}(),d(r[0]),f()}
-// 绑定按钮事件
-const v=document.getElementById("prevBtn"),w=document.getElementById("nextBtn"),x=document.querySelector(".carousel-container");v&&v.addEventListener("click",()=>{u(),f()}),w&&w.addEventListener("click",()=>{m(),f()}),x&&(x.addEventListener("mouseenter",y),x.addEventListener("mouseleave",f)),document.addEventListener("keydown",t=>{"ArrowLeft"===t.key&&(u(),f()),"ArrowRight"===t.key&&(m(),f())}),document.addEventListener("visibilitychange",()=>{document.hidden?y():f()}),
-// 如果页面已加载完成则直接初始化，否则等 DOM 加载完
-"complete"===document.readyState||"interactive"===document.readyState?p():document.addEventListener("DOMContentLoaded",p)}();
+(function () {
+  const images = [
+    {
+      src: "/images/a.jpg",
+      alt: "a",
+    },
+    {
+      src: "/images/b.jpg",
+      alt: "b",
+    },
+    {
+      src: "/images/c.png",
+      alt: "c",
+    },
+    {
+      src: "/images/d.jpg",
+      alt: "d",
+    },
+    {
+      src: "/images/e.jpg",
+      alt: "e",
+    },
+    {
+      src: "/images/f.jpg",
+      alt: "f",
+    },
+    {
+      src: "/images/g.jpg",
+      alt: "g",
+    },
+    {
+      src: "/images/h.jpg",
+      alt: "h",
+    },
+    {
+      src: "/images/i.jpg",
+      alt: "i",
+    },
+    {
+      src: "/images/j.jpg",
+      alt: "j",
+    },
+    {
+      src: "/images/k.jpg",
+      alt: "k",
+    },
+    {
+      src: "/images/l.jpg",
+      alt: "l",
+    },
+    {
+      src: "/images/m.jpg",
+      alt: "m",
+    },
+    {
+      src: "/images/n.jpg",
+      alt: "n",
+    },
+    {
+      src: "/images/o.jpg",
+      alt: "o",
+    },
+  ];
+
+  const canvas = document.getElementById("canvas");
+  const ctx = canvas.getContext("2d");
+  const indicatorsEl = document.getElementById("indicators");
+
+  let currentIndex = 0;
+  let isTransitioning = false;
+  let autoPlayTimer = null;
+  let animationFrame = null;
+  const loadedImages = [];
+  const PIXEL_SIZE = 6;
+
+  function resizeCanvas() {
+    // 获取 .my-swiper-wrapper 的宽度
+    const wrapper = document.querySelector('.my-swiper-wrapper');
+    const container = document.querySelector('.carousel-container');
+  
+    if (!wrapper || !container) return;
+  
+    const wrapperWidth = wrapper.getBoundingClientRect().width;
+    const containerHeight = container.getBoundingClientRect().height;
+  
+    // Canvas 宽度 = wrapper 宽度，高度 = container 高度
+    canvas.width = wrapperWidth * devicePixelRatio;
+    canvas.height = containerHeight * devicePixelRatio;
+    canvas.style.width = wrapperWidth + 'px';
+    canvas.style.height = containerHeight + 'px';
+  
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    if (!isTransitioning && loadedImages[currentIndex]) {
+      drawImageCover(loadedImages[currentIndex]);
+    }
+  }
+
+  function drawImageCover(img, targetCtx) {
+    const c = targetCtx || ctx;
+    const cw = canvas.width / devicePixelRatio;
+    const ch = canvas.height / devicePixelRatio;
+    if (cw === 0 || ch === 0) return;
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const canvasRatio = cw / ch;
+    let sx, sy, sw, sh;
+
+    if (imgRatio > canvasRatio) {
+      sh = img.naturalHeight;
+      sw = sh * canvasRatio;
+      sx = (img.naturalWidth - sw) / 2;
+      sy = 0;
+    } else {
+      sw = img.naturalWidth;
+      sh = sw / canvasRatio;
+      sx = 0;
+      sy = (img.naturalHeight - sh) / 2;
+    }
+    c.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+  }
+
+  function getImagePixels(img) {
+    const cw = canvas.width / devicePixelRatio;
+    const ch = canvas.height / devicePixelRatio;
+    const offscreen = document.createElement("canvas");
+    offscreen.width = cw;
+    offscreen.height = ch;
+    const offCtx = offscreen.getContext("2d");
+
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const canvasRatio = cw / ch;
+    let sx, sy, sw, sh;
+
+    if (imgRatio > canvasRatio) {
+      sh = img.naturalHeight;
+      sw = sh * canvasRatio;
+      sx = (img.naturalWidth - sw) / 2;
+      sy = 0;
+    } else {
+      sw = img.naturalWidth;
+      sh = sw / canvasRatio;
+      sx = 0;
+      sy = (img.naturalHeight - sh) / 2;
+    }
+    offCtx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+    return offCtx.getImageData(0, 0, cw, ch);
+  }
+
+  function pixelRainTransition(fromImg, toImg, callback) {
+    const cw = canvas.width / devicePixelRatio;
+    const ch = canvas.height / devicePixelRatio;
+    const cols = Math.ceil(cw / PIXEL_SIZE);
+    const rows = Math.ceil(ch / PIXEL_SIZE);
+
+    const fromPixels = getImagePixels(fromImg);
+    const columnConfigs = [];
+    for (let col = 0; col < cols; col++) {
+      const centerDist = Math.abs(col - cols / 2) / (cols / 2);
+      const waveDelay = centerDist * 0.3 + Math.random() * 0.15;
+      columnConfigs.push({
+        delay: waveDelay,
+        speed: 0.8 + Math.random() * 0.6,
+        trail: 3 + Math.floor(Math.random() * 5),
+      });
+    }
+
+    const pixelStates = [];
+    for (let row = 0; row < rows; row++) {
+      pixelStates[row] = [];
+      for (let col = 0; col < cols; col++) {
+        const sx = Math.min(col * PIXEL_SIZE + PIXEL_SIZE / 2, cw - 1);
+        const sy = Math.min(row * PIXEL_SIZE + PIXEL_SIZE / 2, ch - 1);
+        const idx = (Math.floor(sy) * Math.floor(cw) + Math.floor(sx)) * 4;
+        pixelStates[row][col] = {
+          r: fromPixels.data[idx] || 0,
+          g: fromPixels.data[idx + 1] || 0,
+          b: fromPixels.data[idx + 2] || 0,
+          fallen: false,
+          y: row * PIXEL_SIZE,
+          vy: 0,
+          opacity: 1,
+        };
+      }
+    }
+
+    const duration = 2200;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.globalAlpha = Math.min(1, progress * 2);
+      drawImageCover(toImg);
+      ctx.globalAlpha = 1;
+      let allFallen = true;
+
+      for (let col = 0; col < cols; col++) {
+        const config = columnConfigs[col];
+        const colProgress = Math.max(0, (progress - config.delay) / (1 - config.delay));
+        const dissolveFront = colProgress * (rows + config.trail);
+
+        for (let row = 0; row < rows; row++) {
+          const pixel = pixelStates[row][col];
+          if (row < dissolveFront && !pixel.fallen) {
+            pixel.fallen = true;
+            pixel.vy = config.speed * 2;
+          }
+          if (pixel.fallen) {
+            pixel.vy += 0.35 * config.speed;
+            pixel.y += pixel.vy;
+            const fallDist = pixel.y - row * PIXEL_SIZE;
+            pixel.opacity = Math.max(0, 1 - fallDist / (ch * 0.7));
+            if (pixel.y < ch + PIXEL_SIZE && pixel.opacity > 0.01) {
+              allFallen = false;
+              ctx.globalAlpha = pixel.opacity;
+              ctx.fillStyle = `rgb(${pixel.r}, ${pixel.g}, ${pixel.b})`;
+              ctx.fillRect(col * PIXEL_SIZE, pixel.y, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
+              if (pixel.opacity > 0.3 && pixel.vy > 3) {
+                ctx.globalAlpha = pixel.opacity * 0.2;
+                ctx.fillStyle = `rgb(${Math.min(255, pixel.r + 80)}, ${Math.min(255, pixel.g + 80)}, ${Math.min(255, pixel.b + 80)})`;
+                for (let t = 1; t <= 2; t++) {
+                  ctx.fillRect(col * PIXEL_SIZE, pixel.y - t * PIXEL_SIZE * 0.8, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
+                }
+              }
+            }
+          } else {
+            allFallen = false;
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = `rgb(${pixel.r}, ${pixel.g}, ${pixel.b})`;
+            ctx.fillRect(col * PIXEL_SIZE, pixel.y, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      if (progress < 1 || !allFallen) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, cw, ch);
+        drawImageCover(toImg);
+        callback();
+      }
+    }
+    animationFrame = requestAnimationFrame(animate);
+  }
+
+  function goTo(targetIndex) {
+    if (isTransitioning || targetIndex === currentIndex) return;
+    isTransitioning = true;
+    const dots = indicatorsEl.querySelectorAll(".indicator");
+    dots[currentIndex].classList.remove("active");
+    dots[targetIndex].classList.add("active");
+    pixelRainTransition(loadedImages[currentIndex], loadedImages[targetIndex], () => {
+      currentIndex = targetIndex;
+      isTransitioning = false;
+    });
+  }
+
+  function next() {
+    goTo((currentIndex + 1) % images.length);
+  }
+
+  function prev() {
+    goTo((currentIndex - 1 + images.length) % images.length);
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(next, 9000);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  function preloadImages() {
+    let loaded = 0;
+    return new Promise((resolve) => {
+      images.forEach((imgData, index) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+          loadedImages[index] = img;
+          loaded++;
+          if (loaded === images.length) resolve();
+        };
+        img.onerror = () => {
+          const placeholder = document.createElement("canvas");
+          placeholder.width = 1920;
+          placeholder.height = 1080;
+          const pCtx = placeholder.getContext("2d");
+          const gradient = pCtx.createLinearGradient(0, 0, 1920, 1080);
+          gradient.addColorStop(0, `hsl(${index * 60 + 140}, 50%, 25%)`);
+          gradient.addColorStop(1, `hsl(${index * 60 + 170}, 50%, 15%)`);
+          pCtx.fillStyle = gradient;
+          pCtx.fillRect(0, 0, 1920, 1080);
+          pCtx.fillStyle = "#fff";
+          pCtx.font = "48px sans-serif";
+          pCtx.textAlign = "center";
+          pCtx.fillText(imgData.alt, 960, 540);
+          loadedImages[index] = placeholder;
+          loaded++;
+          if (loaded === images.length) resolve();
+        };
+        img.src = imgData.src;
+      });
+    });
+  }
+
+  async function init() {
+    // 等待 DOM 完全渲染
+    await new Promise((r) => setTimeout(r, 100));
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    images.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.className = `indicator ${index === 0 ? "active" : ""}`;
+      dot.addEventListener("click", () => goTo(index));
+      indicatorsEl.appendChild(dot);
+    });
+
+    await preloadImages();
+    drawImageCover(loadedImages[0]);
+    startAutoPlay();
+  }
+
+  // 绑定按钮事件
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const container = document.querySelector(".carousel-container");
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => { prev();
+      startAutoPlay(); });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => { next();
+      startAutoPlay(); });
+  }
+  if (container) {
+    container.addEventListener("mouseenter", stopAutoPlay);
+    container.addEventListener("mouseleave", startAutoPlay);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { prev();
+      startAutoPlay(); }
+    if (e.key === "ArrowRight") { next();
+      startAutoPlay(); }
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    document.hidden ? stopAutoPlay() : startAutoPlay();
+  });
+
+  // 如果页面已加载完成则直接初始化，否则等 DOM 加载完
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    init();
+  } else {
+    document.addEventListener("DOMContentLoaded", init);
+  }
+})();

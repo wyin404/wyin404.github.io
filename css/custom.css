@@ -1,1 +1,185 @@
-#footer,#page-header,#footer:before,#page-header:before,[data-theme=dark] #footer:before,[data-theme=dark] #page-header:before{background:0 0!important}@font-face{font-family:圆滑;src:url(/font/YShiWritten-Regular.ttf)}#avatar-img:hover{transition:none!important;transform:none!important}#font-panel{background:var(--card-bg);z-index:100;border:1px solid var(--border-color);border-radius:16px;min-width:180px;padding:16px;position:absolute;bottom:40px;right:0;box-shadow:0 8px 30px #0000001f}#font-panel .font-option{cursor:pointer;border-radius:6px;justify-content:space-between;align-items:center;gap:30px;padding:8px 14px;transition:background .2s;display:flex}#font-panel .font-option:hover{background:var(--grey-2)}#font-panel .font-option.active{background:var(--theme-color);color:#3c83ce}#font-panel .font-option .font-sample{font-size:18px}.font-option[data-font=default] .font-sample{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.font-option[data-font=serif] .font-sample{font-family:圆滑}#nav .menus_items{top:0;width:fit-content!important;position:absolute!important;left:50%!important;transform:translate(-50%)!important}#nav .menus_items .menus_item:hover .menus_item_child{display:flex!important}.menus_items .menus_item:nth-child(4) .menus_item_child{left:-90px}[data-theme=dark] #sidebar #sidebar-menus .menus_items .site-page{text-shadow:0 0 1px var(--theme-color)!important}.recent-post-item{background:#000!important;border:1px solid #333!important}#recent-posts .recent-post-item>.recent-post-info>.article-title,#recent-posts .recent-post-item>.recent-post-info>.content{color:#fff!important}#article-container a,#article-container a *{color:#8ab4f8!important}.menus_items{background:0 0!important}.menus_item_child li a{background:#1f1f1f!important}.menus_item_child li a *{color:#fff!important}.recent-post-item .post_cover,.recent-post-item .post_thumb,.recent-post-item .post_cover img{will-change:auto!important;transition:none!important;transform:scale(1)!important}.sidebar *,.card-info *,.card-tags *,.card-categories *,.card-archives *,.card-recent-post *,.sidebar a,.sidebar a *,.sidebar .widget-title,.card-info .author-info__name,.card-info .author-info__description,#clock-date,#clock-time,.item-headline,.webinfo *{color:#fff!important}
+/* 页脚与头图透明 */
+#footer {
+    background: transparent !important;
+}
+#page-header {
+    background: transparent !important;
+}
+
+/* 白天模式遮罩透明 */
+#footer::before {
+    background: transparent !important;
+}
+#page-header::before {
+    background: transparent !important;
+}
+
+/* 夜间模式遮罩透明 */
+[data-theme="dark"] #footer::before {
+    background: transparent !important;
+}
+[data-theme="dark"] #page-header::before {
+    background: transparent !important;
+}
+
+
+@font-face {
+    font-family: '圆滑';
+    src: url(/font/YShiWritten-Regular.ttf);
+    font-weight: 900 !important;
+}
+
+#avatar-img:hover {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 字体切换面板 */
+#font-panel {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 16px 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  z-index: 100;
+  border: 1px solid var(--border-color);
+}
+
+#font-panel .font-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+  gap: 30px;
+}
+
+#font-panel .font-option:hover {
+  background: var(--grey-2);
+}
+
+#font-panel .font-option.active {
+  background: var(--theme-color);
+  color: #3c83ce;
+}
+
+#font-panel .font-option .font-sample {
+  font-size: 18px;
+}
+
+.font-option[data-font="default"] .font-sample {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-option[data-font="serif"] .font-sample {
+  font-family: '圆滑';
+}
+
+
+/* 一级菜单居中 */
+#nav .menus_items {
+  position: absolute !important;
+  width: fit-content !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 0px
+}
+/* 子菜单横向展示 */
+#nav .menus_items .menus_item:hover .menus_item_child {
+  display: flex !important; 
+}
+
+.menus_items .menus_item:nth-child(4) .menus_item_child {
+  left: -90px;
+}
+
+/* 手机适配 */
+[data-theme="dark"] #sidebar #sidebar-menus .menus_items .site-page {
+  text-shadow: 0 0 1px var(--theme-color) !important;
+}
+
+/* ===== 主页文章 ===== */
+.recent-post-item {
+  background: #000000 !important;
+  border: 1px solid #333 !important;  /* 加个灰色边框让卡片有层次 */
+}
+/* ===== 强制主页文章标题白色 ===== */
+#recent-posts .recent-post-item > .recent-post-info > .article-title {
+  color: #FFF !important;
+}
+
+/* ===== 强制主页文章预览内容白色 ===== */
+#recent-posts .recent-post-item > .recent-post-info > .content {
+  color: #FFF !important;
+}
+
+/* 链接颜色 */
+/* ===== 文章内链接颜色（只限文章内容区） ===== */
+#article-container a,
+#article-container a * {
+  color: #8ab4f8 !important;
+}
+/* ===== 菜单背景：PC 端透明 ===== */
+.menus_items {
+  background: transparent !important;
+}
+.menus_item_child li a {
+  background: #1f1f1f !important;
+}
+.menus_item_child li a * {
+  color: #FFF !important;
+}
+/* 特别针对封面区域，强制保持原始尺寸 */
+.recent-post-item .post_cover,
+.recent-post-item .post_thumb,
+.recent-post-item .post_cover img {
+  transform: scale(1) !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+
+/* ===== 主页侧边栏所有文字强制白色 ===== */
+.sidebar *,
+.card-info *,
+.card-tags *,
+.card-categories *,
+.card-archives *,
+.card-recent-post * {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏链接也要白色（覆盖默认蓝色） ===== */
+.sidebar a,
+.sidebar a * {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏标题 ===== */
+.sidebar .widget-title,
+.card-info .author-info__name,
+.card-info .author-info__description {
+  color: #FFF !important;
+}
+/* ===== 侧边栏时钟日期 ===== */
+#clock-date {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏时钟时间 ===== */
+#clock-time {
+  color: #FFF !important;
+}
+/* ===== 侧边栏网站信息标题 ===== */
+.item-headline {
+  color: #FFF !important;
+}
+
+/* ===== 侧边栏网站信息所有文字 ===== */
+.webinfo * {
+  color: #FFF !important;
+}
