@@ -31,7 +31,35 @@
     {
       src: "/images/h.jpg",
       alt: "h",
-    }
+    },
+    {
+      src: "/images/i.jpg",
+      alt: "i",
+    },
+    {
+      src: "/images/j.jpg",
+      alt: "j",
+    },
+    {
+      src: "/images/k.jpg",
+      alt: "k",
+    },
+    {
+      src: "/images/l.jpg",
+      alt: "l",
+    },
+    {
+      src: "/images/m.jpg",
+      alt: "m",
+    },
+    {
+      src: "/images/n.jpg",
+      alt: "n",
+    },
+    {
+      src: "/images/o.jpg",
+      alt: "o",
+    },
   ];
 
   const canvas = document.getElementById("canvas");
