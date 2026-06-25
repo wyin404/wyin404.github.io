@@ -266,7 +266,7 @@
 
   function startAutoPlay() {
     stopAutoPlay();
-    autoPlayTimer = setInterval(next, 9000);
+    autoPlayTimer = setInterval(next, 7500);
   }
 
   function stopAutoPlay() {
