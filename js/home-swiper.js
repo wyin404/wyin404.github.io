@@ -1,7 +1,7 @@
 (function () {
   const images = [
     {
-      src: "/images/a.png",
+      src: "/images/a.jpg",
       alt: "a",
     },
     {
