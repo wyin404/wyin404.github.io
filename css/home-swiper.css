@@ -160,3 +160,44 @@
   display: block !important;
   box-sizing: border-box !important;
 }
+/* ===== 轮播和文章卡片撑满，保留圆角 ===== */
+
+/* 1. 容器去掉内边距 */
+.recent-posts {
+  padding: 0 !important;
+  max-width: 100% !important;
+}
+
+/* 2. 轮播撑满，保留圆角 */
+.my-swiper-wrapper {
+  padding: 0 !important;
+  margin: 0 0 20px 0 !important;
+  width: 100% !important;
+}
+
+.my-swiper-wrapper .container {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+.my-swiper-wrapper .carousel-container {
+  border-radius: 12px !important;  /* 保留圆角 */
+  width: 100% !important;
+  overflow: hidden !important;  /* 确保圆角裁切生效 */
+}
+
+/* 3. 文章卡片撑满，保留圆角 */
+.recent-posts .recent-post-item {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 20px 0 !important;
+  border-radius: 12px !important;  /* 保留圆角 */
+}
+
+/* 5. 确保 flex/grid 下也撑满 */
+.recent-posts .recent-post-item {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
