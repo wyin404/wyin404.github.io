@@ -35,6 +35,43 @@
 }
 
 /* 字体切换面板 */
+/* 白天模式变量 */
+:root {
+  --font-btn-bg: #49b1f5;
+  --font-btn-color: #ffffff;
+  --font-btn-hover-bg: #ff7242;
+}
+
+/* 夜晚模式变量 */
+[data-theme="dark"] {
+  --font-btn-bg: #1f1f1f;
+  --font-btn-color: #fff;
+  --font-btn-hover-bg: #c3c1c1;
+}
+
+/* 字体切换按钮 */
+#font-toggle-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 34.99px;
+  height: 34.99px;
+  background: var(--font-btn-bg, #000000) !important;
+  border-radius: 4px !important;
+  color: var(--font-btn-color, #ffffff) !important;
+  transition: all 0.3s ease;
+}
+
+#font-toggle-btn:hover {
+  background: var(--font-btn-hover-bg, #222222) !important;
+  transform: scale(1.05);
+}
+
+#font-toggle-btn i {
+  font-size: 16px;
+  line-height: 1;
+}
+
 #font-panel {
   position: absolute;
   bottom: 40px;
