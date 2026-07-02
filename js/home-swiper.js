@@ -282,7 +282,7 @@
 
   function startAutoPlay() {
     stopAutoPlay();
-    autoPlayTimer = setInterval(next, 7500);
+    autoPlayTimer = setInterval(next, 7000);
   }
 
   function stopAutoPlay() {
