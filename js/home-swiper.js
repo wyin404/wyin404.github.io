@@ -60,6 +60,22 @@
       src: "/images/o.jpg",
       alt: "o",
     },
+    {
+      src: "/images/p.jpg",
+      alt: "p",
+    },
+    {
+      src: "/images/q.jpg",
+      alt: "q",
+    },
+    {
+      src: "/images/r.jpg",
+      alt: "r",
+    },
+    {
+      src: "/images/s.jpg",
+      alt: "s",
+    },
   ];
 
   const canvas = document.getElementById("canvas");
