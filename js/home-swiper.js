@@ -76,6 +76,26 @@
       src: "/images/s.jpg",
       alt: "s",
     },
+    {
+      src: "/images/t.jpg",
+      alt: "t",
+    },
+    {
+      src: "/images/u.jpg",
+      alt: "u",
+    },
+    {
+      src: "/images/v.jpg",
+      alt: "v",
+    },
+    {
+      src: "/images/w.jpg",
+      alt: "w",
+    },
+    {
+      src: "/images/x.jpg",
+      alt: "x",
+    },
   ];
 
   const canvas = document.getElementById("canvas");
