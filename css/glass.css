@@ -16,17 +16,5 @@
 
 /* ===== （可选）文章封面图区域 ===== */
 .recent-post-item .post_cover {
-  background: transparent !important; /* 让封面图不遮挡毛玻璃效果 */
+  background: transparent !important; 
 }
-
-/* ===== （可选）文章标题和摘要文字颜色调深一点，保证可读性 ===== */
-.recent-post-item .recent-post-info .article-title,
-.recent-post-item .recent-post-info .article-meta-wrap,
-.recent-post-item .recent-post-info .content {
-  color: #333 !important; /* 深色文字，浅色背景时用 */
-}
-
-/* 如果是深色背景，用白色文字 */
-/* .recent-post-item .recent-post-info .article-title {
-  color: #fff !important;
-} */

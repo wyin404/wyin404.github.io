@@ -28,12 +28,6 @@
     src: url(/font/YShiWritten-Regular.ttf);
     font-weight: 900 !important;
 }
-
-#avatar-img:hover {
-  transform: none !important;
-  transition: none !important;
-}
-
 /* 字体切换面板 */
 /* 白天模式变量 */
 :root {
@@ -145,22 +139,7 @@
   background: #000000 !important;
   border: 1px solid #333 !important;  /* 加个灰色边框让卡片有层次 */
 }
-/* ===== 强制主页文章标题白色 ===== */
-#recent-posts .recent-post-item > .recent-post-info > .article-title {
-  color: #FFF !important;
-}
 
-/* ===== 强制主页文章预览内容白色 ===== */
-#recent-posts .recent-post-item > .recent-post-info > .content {
-  color: #FFF !important;
-}
-
-/* 链接颜色 */
-/* ===== 文章内链接颜色（只限文章内容区） ===== */
-#article-container a,
-#article-container a * {
-  color: #8ab4f8 !important;
-}
 /* ===== 菜单背景：PC 端透明 ===== */
 .menus_items {
   background: transparent !important;
@@ -180,43 +159,11 @@
   will-change: auto !important;
 }
 
-/* ===== 主页侧边栏所有文字强制白色 ===== */
-.sidebar *,
-.card-info *,
-.card-tags *,
-.card-categories *,
-.card-archives *,
-.card-recent-post * {
-  color: #FFF !important;
-}
-
-/* ===== 侧边栏链接也要白色（覆盖默认蓝色） ===== */
-.sidebar a,
-.sidebar a * {
-  color: #FFF !important;
-}
-
-/* ===== 侧边栏标题 ===== */
-.sidebar .widget-title,
-.card-info .author-info__name,
-.card-info .author-info__description {
-  color: #FFF !important;
-}
-/* ===== 侧边栏时钟日期 ===== */
-#clock-date {
-  color: #FFF !important;
-}
-
-/* ===== 侧边栏时钟时间 ===== */
-#clock-time {
-  color: #FFF !important;
-}
-/* ===== 侧边栏网站信息标题 ===== */
-.item-headline {
-  color: #FFF !important;
-}
-
-/* ===== 侧边栏网站信息所有文字 ===== */
-.webinfo * {
-  color: #FFF !important;
+/* 当夜间模式激活时，强制覆盖背景图 */
+html[data-theme='dark'] #web_bg {
+background-image: url(/images/background.jpg) !important;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
 }

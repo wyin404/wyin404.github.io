@@ -96,6 +96,10 @@
       src: "/images/x.jpg",
       alt: "x",
     },
+    {
+      src: "/images/y.jpg",
+      alt: "y",
+    },
   ];
 
   const canvas = document.getElementById("canvas");

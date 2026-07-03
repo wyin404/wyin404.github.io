@@ -4442,10 +4442,8 @@ figure.highlight pre .javascript .function {
 }
 #footer > * {
   position: relative;
-  color: var(--light-grey);
 }
 #footer a {
-  color: var(--light-grey);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -4580,8 +4578,22 @@ figure.highlight pre .javascript .function {
   }
 }
 #page-header #site-subtitle {
-  color: var(--light-grey);
+  color: transparent;
+  background: -webkit-linear-gradient(0deg, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+  background: -moz-linear-gradient(0deg, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+  background: -o-linear-gradient(0deg, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+  background: -ms-linear-gradient(0deg, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6, #8b5cf6);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
   font-size: 1.15em;
+  -webkit-animation: flowGradient 6s linear infinite;
+  -moz-animation: flowGradient 6s linear infinite;
+  -o-animation: flowGradient 6s linear infinite;
+  -ms-animation: flowGradient 6s linear infinite;
+  animation: flowGradient 6s linear infinite;
 }
 @media screen and (min-width: 768px) {
   #page-header #site-subtitle {
@@ -4764,6 +4776,50 @@ figure.highlight pre .javascript .function {
 }
 #page-header.fixed + .layout #card-toc .toc-content {
   max-height: calc(100vh - 170px);
+}
+@-moz-keyframes flowGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-webkit-keyframes flowGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-o-keyframes flowGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes flowGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 #page .page-title {
   margin: 0 0 10px;
