@@ -3,10 +3,21 @@
   // ===== 1. 插入加载页 HTML =====
   var loaderHTML = `
     <div id="loader">
-      <!-- GIF 作为全屏背景 -->
-      <img class="loader-gif" src="/images/loading.gif" alt="加载中">
+      <!-- 波浪文字动画 -->
+      <div class="loader-text">
+        <span style="--i:1;">L</span>
+        <span style="--i:2;">o</span>
+        <span style="--i:3;">a</span>
+        <span style="--i:4;">d</span>
+        <span style="--i:5;">i</span>
+        <span style="--i:6;">n</span>
+        <span style="--i:7;">g</span>
+        <span style="--i:8;">.</span>
+        <span style="--i:9;">.</span>
+        <span style="--i:10;">.</span>
+      </div>
       
-      <!-- 进度条区域：靠下 -->
+      <!-- 进度条区域 -->
       <div class="progress-wrapper">
         <div class="progress-container">
           <div class="progress">
