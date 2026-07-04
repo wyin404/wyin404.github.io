@@ -8200,3 +8200,8 @@ blockquote.pullquote.right {
     transform: rotate(360deg);
   }
 }
+.wl-editor {
+  height: 60px !important;
+  max-height: 120px !important;
+  font-size: 20px;
+}

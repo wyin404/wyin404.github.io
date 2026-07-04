@@ -105,7 +105,6 @@
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const indicatorsEl = document.getElementById("indicators");
-
   let currentIndex = 0;
   let isTransitioning = false;
   let autoPlayTimer = null;
