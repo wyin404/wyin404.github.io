@@ -111,169 +111,183 @@
   let autoPlayTimer = null;
   let animationFrame = null;
   const loadedImages = [];
-  const PIXEL_SIZE = 6;
 
   function resizeCanvas() {
-    // 获取 .my-swiper-wrapper 的宽度
-    const wrapper = document.querySelector('.my-swiper-wrapper');
-    const container = document.querySelector('.carousel-container');
-  
-    if (!wrapper || !container) return;
-  
-    const wrapperWidth = wrapper.getBoundingClientRect().width;
-    const containerHeight = container.getBoundingClientRect().height;
-  
-    // Canvas 宽度 = wrapper 宽度，高度 = container 高度
-    canvas.width = wrapperWidth * devicePixelRatio;
-    canvas.height = containerHeight * devicePixelRatio;
-    canvas.style.width = wrapperWidth + 'px';
-    canvas.style.height = containerHeight + 'px';
-  
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
     ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     if (!isTransitioning && loadedImages[currentIndex]) {
       drawImageCover(loadedImages[currentIndex]);
     }
   }
 
-  function drawImageCover(img, targetCtx) {
+  function drawImageCover(img, targetCtx, targetCanvas) {
     const c = targetCtx || ctx;
-    const cw = canvas.width / devicePixelRatio;
-    const ch = canvas.height / devicePixelRatio;
-    if (cw === 0 || ch === 0) return;
-    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const cvs = targetCanvas || canvas;
+    const cw = cvs.width / devicePixelRatio;
+    const ch = cvs.height / devicePixelRatio;
+    const imgW = img.naturalWidth || img.width;
+    const imgH = img.naturalHeight || img.height;
+    const imgRatio = imgW / imgH;
     const canvasRatio = cw / ch;
     let sx, sy, sw, sh;
 
     if (imgRatio > canvasRatio) {
-      sh = img.naturalHeight;
+      sh = imgH;
       sw = sh * canvasRatio;
-      sx = (img.naturalWidth - sw) / 2;
+      sx = (imgW - sw) / 2;
       sy = 0;
     } else {
-      sw = img.naturalWidth;
+      sw = imgW;
       sh = sw / canvasRatio;
       sx = 0;
-      sy = (img.naturalHeight - sh) / 2;
+      sy = (imgH - sh) / 2;
     }
+
     c.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
   }
 
-  function getImagePixels(img) {
-    const cw = canvas.width / devicePixelRatio;
-    const ch = canvas.height / devicePixelRatio;
-    const offscreen = document.createElement("canvas");
-    offscreen.width = cw;
-    offscreen.height = ch;
-    const offCtx = offscreen.getContext("2d");
-
-    const imgRatio = img.naturalWidth / img.naturalHeight;
-    const canvasRatio = cw / ch;
+  function drawCoverRaw(img, targetCtx, w, h) {
+    const imgW = img.naturalWidth || img.width;
+    const imgH = img.naturalHeight || img.height;
+    const imgRatio = imgW / imgH;
+    const canvasRatio = w / h;
     let sx, sy, sw, sh;
-
     if (imgRatio > canvasRatio) {
-      sh = img.naturalHeight;
+      sh = imgH;
       sw = sh * canvasRatio;
-      sx = (img.naturalWidth - sw) / 2;
+      sx = (imgW - sw) / 2;
       sy = 0;
     } else {
-      sw = img.naturalWidth;
+      sw = imgW;
       sh = sw / canvasRatio;
       sx = 0;
-      sy = (img.naturalHeight - sh) / 2;
+      sy = (imgH - sh) / 2;
     }
-    offCtx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
-    return offCtx.getImageData(0, 0, cw, ch);
+    targetCtx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
   }
 
-  function pixelRainTransition(fromImg, toImg, callback) {
+  // 波纹涟漪过渡效果
+  function rippleTransition(fromImg, toImg, callback) {
     const cw = canvas.width / devicePixelRatio;
     const ch = canvas.height / devicePixelRatio;
-    const cols = Math.ceil(cw / PIXEL_SIZE);
-    const rows = Math.ceil(ch / PIXEL_SIZE);
+    const pw = Math.floor(cw);
+    const ph = Math.floor(ch);
 
-    const fromPixels = getImagePixels(fromImg);
-    const columnConfigs = [];
-    for (let col = 0; col < cols; col++) {
-      const centerDist = Math.abs(col - cols / 2) / (cols / 2);
-      const waveDelay = centerDist * 0.3 + Math.random() * 0.15;
-      columnConfigs.push({
-        delay: waveDelay,
-        speed: 0.8 + Math.random() * 0.6,
-        trail: 3 + Math.floor(Math.random() * 5),
-      });
-    }
+    const cx = pw * (0.3 + Math.random() * 0.4);
+    const cy = ph * (0.3 + Math.random() * 0.4);
+    const maxDist = Math.sqrt(
+      Math.max(cx, pw - cx) ** 2 + Math.max(cy, ph - cy) ** 2
+    );
 
-    const pixelStates = [];
-    for (let row = 0; row < rows; row++) {
-      pixelStates[row] = [];
-      for (let col = 0; col < cols; col++) {
-        const sx = Math.min(col * PIXEL_SIZE + PIXEL_SIZE / 2, cw - 1);
-        const sy = Math.min(row * PIXEL_SIZE + PIXEL_SIZE / 2, ch - 1);
-        const idx = (Math.floor(sy) * Math.floor(cw) + Math.floor(sx)) * 4;
-        pixelStates[row][col] = {
-          r: fromPixels.data[idx] || 0,
-          g: fromPixels.data[idx + 1] || 0,
-          b: fromPixels.data[idx + 2] || 0,
-          fallen: false,
-          y: row * PIXEL_SIZE,
-          vy: 0,
-          opacity: 1,
-        };
-      }
-    }
+    const fromCanvas = document.createElement("canvas");
+    fromCanvas.width = pw;
+    fromCanvas.height = ph;
+    const fromCtx = fromCanvas.getContext("2d");
+    drawCoverRaw(fromImg, fromCtx, pw, ph);
+    const fromData = fromCtx.getImageData(0, 0, pw, ph);
+
+    const toCanvas = document.createElement("canvas");
+    toCanvas.width = pw;
+    toCanvas.height = ph;
+    const toCtx = toCanvas.getContext("2d");
+    drawCoverRaw(toImg, toCtx, pw, ph);
+    const toData = toCtx.getImageData(0, 0, pw, ph);
+
+    const outputCanvas = document.createElement("canvas");
+    outputCanvas.width = pw;
+    outputCanvas.height = ph;
+    const outputCtx = outputCanvas.getContext("2d");
+    const outputData = outputCtx.createImageData(pw, ph);
 
     const duration = 2200;
     const startTime = performance.now();
 
+    const waveCount = 3;
+    const waveWidth = 60;
+    const waveAmplitude = 20;
+    const step = 2;
+
     function animate(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      ctx.clearRect(0, 0, cw, ch);
-      ctx.globalAlpha = Math.min(1, progress * 2);
-      drawImageCover(toImg);
-      ctx.globalAlpha = 1;
-      let allFallen = true;
 
-      for (let col = 0; col < cols; col++) {
-        const config = columnConfigs[col];
-        const colProgress = Math.max(0, (progress - config.delay) / (1 - config.delay));
-        const dissolveFront = colProgress * (rows + config.trail);
+      const eased = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
-        for (let row = 0; row < rows; row++) {
-          const pixel = pixelStates[row][col];
-          if (row < dissolveFront && !pixel.fallen) {
-            pixel.fallen = true;
-            pixel.vy = config.speed * 2;
+      const waveFront = eased * (maxDist + waveWidth * waveCount);
+
+      const out = outputData.data;
+
+      for (let y = 0; y < ph; y += step) {
+        for (let x = 0; x < pw; x += step) {
+          const dx = x - cx;
+          const dy = y - cy;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          const relDist = waveFront - dist;
+
+          let srcX = x;
+          let srcY = y;
+          let useNewImage = false;
+
+          if (relDist > waveWidth * waveCount) {
+            useNewImage = true;
+          } else if (relDist > 0) {
+            const wavePhase = (relDist / waveWidth) * Math.PI * 2;
+            const amplitude = waveAmplitude * Math.sin(wavePhase) *
+              Math.exp(-relDist / (waveWidth * waveCount) * 2);
+
+            const angle = Math.atan2(dy, dx);
+            srcX = x + Math.cos(angle) * amplitude;
+            srcY = y + Math.sin(angle) * amplitude;
+
+            useNewImage = relDist > waveWidth;
           }
-          if (pixel.fallen) {
-            pixel.vy += 0.35 * config.speed;
-            pixel.y += pixel.vy;
-            const fallDist = pixel.y - row * PIXEL_SIZE;
-            pixel.opacity = Math.max(0, 1 - fallDist / (ch * 0.7));
-            if (pixel.y < ch + PIXEL_SIZE && pixel.opacity > 0.01) {
-              allFallen = false;
-              ctx.globalAlpha = pixel.opacity;
-              ctx.fillStyle = `rgb(${pixel.r}, ${pixel.g}, ${pixel.b})`;
-              ctx.fillRect(col * PIXEL_SIZE, pixel.y, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
-              if (pixel.opacity > 0.3 && pixel.vy > 3) {
-                ctx.globalAlpha = pixel.opacity * 0.2;
-                ctx.fillStyle = `rgb(${Math.min(255, pixel.r + 80)}, ${Math.min(255, pixel.g + 80)}, ${Math.min(255, pixel.b + 80)})`;
-                for (let t = 1; t <= 2; t++) {
-                  ctx.fillRect(col * PIXEL_SIZE, pixel.y - t * PIXEL_SIZE * 0.8, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
-                }
-              }
+
+          srcX = Math.max(0, Math.min(pw - 1, Math.round(srcX)));
+          srcY = Math.max(0, Math.min(ph - 1, Math.round(srcY)));
+
+          const srcIdx = (srcY * pw + srcX) * 4;
+          const srcData = useNewImage ? toData : fromData;
+
+          for (let dy2 = 0; dy2 < step && y + dy2 < ph; dy2++) {
+            for (let dx2 = 0; dx2 < step && x + dx2 < pw; dx2++) {
+              const outIdx = ((y + dy2) * pw + (x + dx2)) * 4;
+              out[outIdx] = srcData.data[srcIdx];
+              out[outIdx + 1] = srcData.data[srcIdx + 1];
+              out[outIdx + 2] = srcData.data[srcIdx + 2];
+              out[outIdx + 3] = 255;
             }
-          } else {
-            allFallen = false;
-            ctx.globalAlpha = 1;
-            ctx.fillStyle = `rgb(${pixel.r}, ${pixel.g}, ${pixel.b})`;
-            ctx.fillRect(col * PIXEL_SIZE, pixel.y, PIXEL_SIZE - 0.5, PIXEL_SIZE - 0.5);
           }
         }
       }
-      ctx.globalAlpha = 1;
 
-      if (progress < 1 || !allFallen) {
+      outputCtx.putImageData(outputData, 0, 0);
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(outputCanvas, 0, 0, cw, ch);
+
+      if (progress > 0.02 && progress < 0.95) {
+        ctx.save();
+        ctx.globalAlpha = 0.25 * (1 - Math.abs(progress - 0.4));
+
+        for (let w = 0; w < waveCount; w++) {
+          const ringDist = waveFront - w * waveWidth;
+          if (ringDist > 0 && ringDist < maxDist) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, ringDist, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(150, 200, 255, ${0.3 - w * 0.1})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
+        }
+
+        ctx.restore();
+      }
+
+      if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
       } else {
         ctx.clearRect(0, 0, cw, ch);
@@ -281,16 +295,19 @@
         callback();
       }
     }
+
     animationFrame = requestAnimationFrame(animate);
   }
 
   function goTo(targetIndex) {
     if (isTransitioning || targetIndex === currentIndex) return;
     isTransitioning = true;
+
     const dots = indicatorsEl.querySelectorAll(".indicator");
     dots[currentIndex].classList.remove("active");
     dots[targetIndex].classList.add("active");
-    pixelRainTransition(loadedImages[currentIndex], loadedImages[targetIndex], () => {
+
+    rippleTransition(loadedImages[currentIndex], loadedImages[targetIndex], () => {
       currentIndex = targetIndex;
       isTransitioning = false;
     });
@@ -306,7 +323,7 @@
 
   function startAutoPlay() {
     stopAutoPlay();
-    autoPlayTimer = setInterval(next, 7000);
+    autoPlayTimer = setInterval(next, 4500);
   }
 
   function stopAutoPlay() {
@@ -333,8 +350,8 @@
           placeholder.height = 1080;
           const pCtx = placeholder.getContext("2d");
           const gradient = pCtx.createLinearGradient(0, 0, 1920, 1080);
-          gradient.addColorStop(0, `hsl(${index * 60 + 140}, 50%, 25%)`);
-          gradient.addColorStop(1, `hsl(${index * 60 + 170}, 50%, 15%)`);
+          gradient.addColorStop(0, `hsl(${200 + index * 20}, 60%, 20%)`);
+          gradient.addColorStop(1, `hsl(${200 + index * 20}, 60%, 10%)`);
           pCtx.fillStyle = gradient;
           pCtx.fillRect(0, 0, 1920, 1080);
           pCtx.fillStyle = "#fff";
@@ -351,7 +368,6 @@
   }
 
   async function init() {
-    // 等待 DOM 完全渲染
     await new Promise((r) => setTimeout(r, 100));
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -368,18 +384,21 @@
     startAutoPlay();
   }
 
-  // 绑定按钮事件
   const prevBtn = document.getElementById("prevBtn");
   const nextBtn = document.getElementById("nextBtn");
   const container = document.querySelector(".carousel-container");
 
   if (prevBtn) {
-    prevBtn.addEventListener("click", () => { prev();
-      startAutoPlay(); });
+    prevBtn.addEventListener("click", () => {
+      prev();
+      startAutoPlay();
+    });
   }
   if (nextBtn) {
-    nextBtn.addEventListener("click", () => { next();
-      startAutoPlay(); });
+    nextBtn.addEventListener("click", () => {
+      next();
+      startAutoPlay();
+    });
   }
   if (container) {
     container.addEventListener("mouseenter", stopAutoPlay);
@@ -387,17 +406,20 @@
   }
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") { prev();
-      startAutoPlay(); }
-    if (e.key === "ArrowRight") { next();
-      startAutoPlay(); }
+    if (e.key === "ArrowLeft") {
+      prev();
+      startAutoPlay();
+    }
+    if (e.key === "ArrowRight") {
+      next();
+      startAutoPlay();
+    }
   });
 
   document.addEventListener("visibilitychange", () => {
     document.hidden ? stopAutoPlay() : startAutoPlay();
   });
 
-  // 如果页面已加载完成则直接初始化，否则等 DOM 加载完
   if (document.readyState === "complete" || document.readyState === "interactive") {
     init();
   } else {

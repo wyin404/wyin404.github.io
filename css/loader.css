@@ -27,9 +27,10 @@
 }
 
 #loader .loader-text span {
+  will-change: transform;
+  transform: translateZ(0px);
   position: relative;
   display: inline-flex;
-  /* font-size: 3em; */
   font-family: sans-serif;
   color: transparent;
   text-transform: uppercase;

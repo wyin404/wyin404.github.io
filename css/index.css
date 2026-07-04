@@ -4589,11 +4589,17 @@ figure.highlight pre .javascript .function {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   font-size: 1.15em;
-  -webkit-animation: flowGradient 6s linear infinite;
-  -moz-animation: flowGradient 6s linear infinite;
-  -o-animation: flowGradient 6s linear infinite;
-  -ms-animation: flowGradient 6s linear infinite;
-  animation: flowGradient 6s linear infinite;
+  -webkit-animation: flowGradient 8s linear infinite;
+  -moz-animation: flowGradient 8s linear infinite;
+  -o-animation: flowGradient 8s linear infinite;
+  -ms-animation: flowGradient 8s linear infinite;
+  animation: flowGradient 8s linear infinite;
+  will-change: background-position;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 @media screen and (min-width: 768px) {
   #page-header #site-subtitle {
@@ -4785,7 +4791,7 @@ figure.highlight pre .javascript .function {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 5 50%;
   }
 }
 @-webkit-keyframes flowGradient {
@@ -4796,7 +4802,7 @@ figure.highlight pre .javascript .function {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 5 50%;
   }
 }
 @-o-keyframes flowGradient {
@@ -4807,7 +4813,7 @@ figure.highlight pre .javascript .function {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 5 50%;
   }
 }
 @keyframes flowGradient {
@@ -4818,7 +4824,7 @@ figure.highlight pre .javascript .function {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 5 50%;
   }
 }
 #page .page-title {
