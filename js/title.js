@@ -1,6 +1,6 @@
 (function() {
   var normalTitle = document.title;
-  var hiddenTitle = '不许走..要陪我...永远！！！';
+  var hiddenTitle = '喵呜~主人~快回来呀~';
 
   document.addEventListener('visibilitychange', function() {
     document.title = document.hidden ? hiddenTitle : normalTitle;
