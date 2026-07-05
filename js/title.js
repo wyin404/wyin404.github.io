@@ -48,6 +48,6 @@
     timer = setTimeout(function() {
       document.title = normalTitle;
       timer = null;
-    }, 1000);
+    }, 2000);
   });
 })();
