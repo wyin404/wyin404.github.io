@@ -387,18 +387,60 @@
   const nextBtn = document.getElementById("nextBtn");
   const container = document.querySelector(".carousel-container");
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      prev();
-      startAutoPlay();
-    });
+  // 在代码开头添加状态变量（放在 (function () { 的下面）
+let clickSequence = [];
+let sequenceTimer = null;
+
+// 修改 prevBtn 和 nextBtn 的事件监听
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    prev();
+    startAutoPlay();
+    // 记录点击序列
+    recordClick('left');
+  });
+}
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    next();
+    startAutoPlay();
+    // 记录点击序列
+    recordClick('right');
+  });
+}
+
+// 添加点击序列检测函数
+function recordClick(direction) {
+  clickSequence.push(direction);
+  
+  // 如果序列长度超过4，移除最早的一个
+  if (clickSequence.length > 4) {
+    clickSequence.shift();
   }
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      next();
-      startAutoPlay();
-    });
+  
+  // 清空之前的定时器
+  if (sequenceTimer) {
+    clearTimeout(sequenceTimer);
   }
+  
+  // 设置1.5秒超时，如果用户停止点击则重置序列
+  sequenceTimer = setTimeout(() => {
+    // 检查是否匹配 "左左右右" 模式
+    if (clickSequence.length >= 4) {
+      const lastFour = clickSequence.slice(-4);
+      if (lastFour[0] === 'left' && lastFour[1] === 'left' && 
+          lastFour[2] === 'right' && lastFour[3] === 'right') {
+        // 匹配成功，跳转到 /aa.md
+        window.location.href = '/aa/';
+        // 重置序列防止重复跳转
+        clickSequence = [];
+        return;
+      }
+    }
+    // 不匹配则重置序列
+    clickSequence = [];
+  }, 1500);
+}
   if (container) {
     container.addEventListener("mouseenter", stopAutoPlay);
     container.addEventListener("mouseleave", startAutoPlay);

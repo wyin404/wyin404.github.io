@@ -48,6 +48,28 @@
     timer = setTimeout(function() {
       document.title = normalTitle;
       timer = null;
-    }, 2000);
+    }, 1500);
   });
 })();
+// 获取当前小时 (0-23)
+const hour = new Date().getHours();
+let greeting = '';
+
+// 根据时间设定问候语
+if (hour >= 5 && hour < 9) {
+    greeting = '主人早！₍^ >ヮ<^₎ .ᐟ.ᐟ';
+} else if (hour >= 9 && hour < 12) {
+    greeting = '上午好主人~(^・ω・^ )';
+} else if (hour >= 12 && hour < 14) {
+    greeting = '主人午安！(=^-ω-^=)';
+} else if (hour >= 14 && hour < 18) {
+    greeting = '下午好主人~=ᗜωᗜ=';
+} else if (hour >= 18 && hour < 24) {
+    greeting = '主人晚安！(つω-｀)｡oO';
+} else {
+    greeting = '主人~都凌晨了注意休息哦';
+}
+
+// 修改页面标题，保留原站点名
+const originalTitle = document.title;
+document.title = `${greeting}`;
