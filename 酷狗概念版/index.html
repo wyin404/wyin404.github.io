@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&r=G&d=mp&ver=1783235840">
 <meta property="article:published_time" content="2026-07-07T02:00:00.000Z">
-<meta property="article:modified_time" content="2026-07-07T08:28:47.553Z">
+<meta property="article:modified_time" content="2026-07-07T10:07:33.881Z">
 <meta property="article:author" content="wyin404">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&r=G&d=mp&ver=1783235840"><script type="application/ld+json"></script><link rel="shortcut icon" href="/images/live.png"><link rel="canonical" href="https://wyin5100.top/%E9%85%B7%E7%8B%97%E6%A6%82%E5%BF%B5%E7%89%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
@@ -352,7 +352,7 @@
     duration = duration || 3000;
     var c = document.getElementById('toastContainer');
     if (!c) return;
-    var el = document.createElement('div');
+    vfunction getar el = document.createElement('div');
     el.className = 'toast toast-' + type;
     el.textContent = msg;
     c.appendChild(el);
@@ -373,23 +373,39 @@
   }
 
   function getSongCover(song) {
-    // 尝试多种可能存放封面ID的字段
-    var picId = song.img || song.album_pic || song.pic || song.cover || song.pic_id || song.picId || '';
-    
-    if (picId) {
-        // 如果已经是完整URL，直接返回
-        if (picId.startsWith('http://') || picId.startsWith('https://')) {
-            return picId;
+    // 优先使用 Image 字段（完整链接）
+    if (song.Image) {
+        var url = song.Image;
+        // 把 {size} 替换成 200
+        url = url.replace(/\{size\}/g, '200');
+        // 转成 https
+        if (url.startsWith('http://')) {
+            url = url.replace(/^http:/, 'https:');
         }
-        // 酷狗封面图拼接规则：https://imge.kugou.com/stdmusic/200/图片ID.jpg
-        return 'https://imge.kugou.com/stdmusic/200/' + picId + '.jpg';
+        return url;
     }
     
-    // 有些API返回的封面在 album 对象里
-    if (song.album && song.album.pic) {
-        return 'https://imge.kugou.com/stdmusic/200/' + song.album.pic + '.jpg';
+    // 备选：AlbumImage
+    if (song.AlbumImage) {
+        var url = song.AlbumImage;
+        url = url.replace(/\{size\}/g, '200');
+        if (url.startsWith('http://')) {
+            url = url.replace(/^http:/, 'https:');
+        }
+        return url;
     }
     
+    // 备选：从 trans_param.union_cover 获取
+    if (song.trans_param && song.trans_param.union_cover) {
+        var url = song.trans_param.union_cover;
+        url = url.replace(/\{size\}/g, '200');
+        if (url.startsWith('http://')) {
+            url = url.replace(/^http:/, 'https:');
+        }
+        return url;
+    }
+    
+    // 如果没有封面，返回空字符串（会显示占位图标）
     return '';
 }
 
@@ -701,13 +717,9 @@
         var playUrl = song.url || song.play_url || song.mp3url || '';
         var identifier = hash || songId || '';
         var cover = getSongCover(song);
-        var coverHtml = cover ? '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/酷狗概念版/index.htmlundefined"  alt="封面" onerror="this.style.display=\'none\'">' :
-                                '<div class="song-cover" style="background:var(--kugo-bg);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--kugo-secondary);">[M]</div>';
-        html += '<div class="result-item" data-identifier="' + identifier + '" data-url="' + playUrl + '" data-name="' + name + '" data-artist="' + artist + '">' +
-                coverHtml +
-                '<div class="song-info"><div class="song-name">' + name + '</div><div class="song-artist">' + artist + '</div></div>' +
-                '<button class="play-btn" title="播放">▶</button></div>';
-      });
+var coverHtml = cover ? 
+    '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/酷狗概念版/index.htmlundefined"  alt="封面" onerror="this.style.display=\'none\'">' :
+    '<div class="song-cover" style="background:var(--kugo-bg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--kugo-secondary);border:1px solid var(--kugo-border);">' + name.charAt(0).toUpperCase() + '</div>';
       dom.searchResults.innerHTML = html;
       dom.searchResults.querySelectorAll('.result-item').forEach(function(item) {
         var btn = item.querySelector('.play-btn');
@@ -903,7 +915,7 @@
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">7.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-07T08:38:56.933Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wyin404</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><!-- ===== 【插入点1】字体切换按钮放在隐藏设置里 =====--><!-- 这样字体按钮会出现在齿轮点击后的面板中--><div class="rightside-item"><a id="font-toggle-btn" title="字体切换"><i class="fas fa-font"></i></a></div><!-- ===== 字体选择面板（放在隐藏设置内部，随面板显示） =====--><div id="font-panel" style="display:none"><div class="font-option" data-font="default" onclick="setFont(&quot;default&quot;)"><span>默认</span><span class="font-sample">文a</span></div><div class="font-option" data-font="custom" onclick="setFont(&quot;custom&quot;)"><span>圆滑</span><span class="font-sample">文a</span></div></div></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script data-pjax src="/js/home-swiper.js"></script><script src="/js/clock.js"></script><script src="/js/change.js"></script><script src="/js/loader.js"></script><script src="/js/title.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">7.8k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-07-07T10:08:03.265Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wyin404</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><!-- ===== 【插入点1】字体切换按钮放在隐藏设置里 =====--><!-- 这样字体按钮会出现在齿轮点击后的面板中--><div class="rightside-item"><a id="font-toggle-btn" title="字体切换"><i class="fas fa-font"></i></a></div><!-- ===== 字体选择面板（放在隐藏设置内部，随面板显示） =====--><div id="font-panel" style="display:none"><div class="font-option" data-font="default" onclick="setFont(&quot;default&quot;)"><span>默认</span><span class="font-sample">文a</span></div><div class="font-option" data-font="custom" onclick="setFont(&quot;custom&quot;)"><span>圆滑</span><span class="font-sample">文a</span></div></div></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"></div><script data-pjax src="/js/home-swiper.js"></script><script src="/js/clock.js"></script><script src="/js/change.js"></script><script src="/js/loader.js"></script><script src="/js/title.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
     <script src="/js/gallery.js" async></script>
 <div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
 for(var i = 0;i<arr.length;i++){
