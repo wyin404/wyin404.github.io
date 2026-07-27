@@ -1,26 +1,6 @@
 (function () {
   const images = [
     {
-      src: "/images/a.jpg",
-      alt: "a",
-    },
-    {
-      src: "/images/b.jpg",
-      alt: "b",
-    },
-    {
-      src: "/images/c.png",
-      alt: "c",
-    },
-    {
-      src: "/images/d.jpg",
-      alt: "d",
-    },
-    {
-      src: "/images/e.jpg",
-      alt: "e",
-    },
-    {
       src: "/images/f.jpg",
       alt: "f",
     },
