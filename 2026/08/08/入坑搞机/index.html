@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>入坑搞机 | nya</title><meta name="author" content="wyin404"><meta name="copyright" content="wyin404"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="起因：root ——安卓最高权限早在初一我就因为手机桌面美化认识到了root，深感好奇，当时也深入了解过想要获取，奈何没有pc，技术有限对计算机认识也比较笼统最后也就不了了之。但最近，一次突发奇想，翻出了老爸的小米6——一代机皇（奈刷王），在毕站、酷安、ai高强度冲浪查找资料后我终于有足够的底气去圆这个“一时兴起”  搞机第一步：解锁（bootloader）米6解锁对新手极其友好，开发者模式→设备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入坑搞机">
+<meta property="og:url" content="https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/index.html">
+<meta property="og:site_name" content="nya">
+<meta property="og:description" content="起因：root ——安卓最高权限早在初一我就因为手机桌面美化认识到了root，深感好奇，当时也深入了解过想要获取，奈何没有pc，技术有限对计算机认识也比较笼统最后也就不了了之。但最近，一次突发奇想，翻出了老爸的小米6——一代机皇（奈刷王），在毕站、酷安、ai高强度冲浪查找资料后我终于有足够的底气去圆这个“一时兴起”  搞机第一步：解锁（bootloader）米6解锁对新手极其友好，开发者模式→设备">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg">
+<meta property="article:published_time" content="2026-08-08T14:55:30.000Z">
+<meta property="article:modified_time" content="2026-08-08T16:36:01.804Z">
+<meta property="article:author" content="wyin404">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="折腾">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "入坑搞机",
+  "url": "https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/",
+  "image": "https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg",
+  "datePublished": "2026-08-08T14:55:30.000Z",
+  "dateModified": "2026-08-08T16:36:01.804Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "wyin404",
+      "url": "https://wyin5100.top"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/images/live.png"><link rel="canonical" href="https://wyin5100.top/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '入坑搞机',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="stylesheet" href="/css/home-swiper.css"><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/clock.css"><link rel="stylesheet" href="/css/glass.css"><link rel="stylesheet" href="/css/loader.css"><style>
+  /* 隐藏 recent-posts 容器的所有视觉轮廓 */
+  .recent-posts {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+</style>
+<!-- hexo injector head_end start -->
+    <link rel="stylesheet" href="/css/gallery.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/images/background2.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cn.cravatar.com/avatar/1ece79990c47852988dd6f3ab5c7fa68?s=400&amp;r=G&amp;d=mp&amp;ver=1783235840" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 图库</span></a></li><li><a class="site-page child" href="/game/"><span> ⚡神秘游戏⚡</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">入坑搞机</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><span class="site-page group hide"><i class="fa-fw fas fa-list"></i><span> 列表</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movie/"><i class="fa-fw fas fa-video"></i><span> 视频</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 图库</span></a></li><li><a class="site-page child" href="/game/"><span> ⚡神秘游戏⚡</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">入坑搞机</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-08T14:55:30.000Z" title="发表于 2026-08-08 22:55:30">2026-08-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-08T16:36:01.804Z" title="更新于 2026-08-09 00:36:01">2026-08-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="起因：root-——安卓最高权限"><a href="#起因：root-——安卓最高权限" class="headerlink" title="起因：root ——安卓最高权限"></a>起因：root ——安卓最高权限</h2><p>早在初一我就因为手机桌面美化认识到了root，深感好奇，当时也深入了解过想要获取，奈何没有pc，技术有限对计算机认识也比较笼统最后也就不了了之。但最近，一次突发奇想，翻出了老爸的小米6——一代机皇（奈刷王），在毕站、酷安、ai高强度冲浪查找资料后我终于有足够的底气去圆这个“一时兴起”</p>
+<ul>
+<li>搞机第一步：解锁（bootloader）<br>米6解锁对新手极其友好，开发者模式→设备解锁→绑定账号→按引导下载pc端工具并完成解锁，注意如若解锁工具识别不到手机，一定一定要安装usb3.0驱动（好像是这个名来着）搞机助手里就可以一键安装</li>
+<li>搞机第二步：刷入第三方recovery<br>在我重做电脑系统后（做电脑系统我也写了一篇<a href="/2026/07/17/%E5%81%9A%E7%B3%BB%E7%BB%9F%E5%B7%B2%E5%A6%82%E5%96%9D%E6%B0%B4%E8%88%AC%E7%AE%80%E5%8D%95%E4%BA%86/" title="做系统已如喝水般简单了">短文</a>）我对计算机的系统有了更深的理解，recovery简单来说就是一个隐藏的系统，它可以在计算机的主系统（即安卓上的hyperOS、originOS、colorOS…）损坏或想要更换系统时帮你更简易的自救更换，其实每个厂商的手机都自带一个rec（recovery简称下文同）但它太简易了，所以要实现刷机、刷root、刷内核等等一系列搞机玩法，一个好用的第三方rec就显得尤为重要。常见的rec想必大家一搜就能搜到，无非就是TWRP、橙狐之类的，刷写过程简单说下：下载你手机对应版本的rec镜像→pc安装fastboot驱动→手机（解锁后）进入fastboot模式（fastboot模式每个厂商的机子进入方法不一）→打开pc端cmd输入</li>
+</ul>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash boot &quot;你的rec镜像文件地址&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>搞机第？？步哈哈其实做完上面的步骤你就已经完成所有搞机前置任务了，接下来就是看你要怎么搞了</li>
+</ul>
+<h2 id="刷入友商的ROM"><a href="#刷入友商的ROM" class="headerlink" title="刷入友商的ROM"></a>刷入友商的ROM</h2><p>有搞头？我把米6的miui换成了colorOS16！！</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/mi6.jpg" class="">
+<p>把米pad4的miui换成了hyperOS1！！</p>
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/mipad4.jpg" class="">
+<p>这些都是在酷安找的刷机包，刷入方法是：<br>1、在pc数据线连fastboot模式下的手机运行大佬编的脚本刷入。<br>2、也可以把ROM包放到手机存储目录，在rec模式下直接安装 刷机包.zip，但要注意刷友商、第三方ROM或跨大版本更新原系统可能需要执行双清更甚者需要格式化data分区，但格式data你本地存储的卡刷包又没了，这就需要在你手机插入存储TF卡存卡刷包或打开rec的MTP模式接电脑传入你的卡刷包来刷机了</p>
+<h2 id="刷入root权限"><a href="#刷入root权限" class="headerlink" title="刷入root权限"></a>刷入root权限</h2><p>这是最简单的一个折腾选项，刚认识root原以为这个权限这么大获取肯定很难，但实操后知道了解锁才是最难。。<br>简易过程以magisk面具为例（其他的没用过，kernelsu需要内核版本在5.x以上来着我的机子无一例外没这么高，我也懒得研究刷内核了）：在你的机子安装magisk应用→进应用会显示无法获取直接点最上面的安装→选择镜像文件把你装的ROM里的boot.img放进去修补→修好的镜像传pc手机进fastboot并连接pc,cmd执行命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash boot &quot;magisk修补好的boot镜像地址&quot;</span><br></pre></td></tr></table></figure>
+<p>或者懒得用电脑，直接进rec点安装，安装镜像，选择并安装，完事</p>
+<h2 id="主力机（hyper-1）解锁"><a href="#主力机（hyper-1）解锁" class="headerlink" title="主力机（hyper 1）解锁"></a>主力机（hyper 1）解锁</h2><p>前面的机器都是老古董miui，官方提供解锁渠道，但小米的机子一旦升级了澎湃系统，呵呵，有多难你可以去搜搜看。本以为我主力机子无缘搞机（其实无论高通还是联发科的芯片都有深度刷机模式可以强解bl锁但都需要拆机，物理改一些东西我没信心能折腾出来所以不在考虑范围内），但在无数次翻阅查找方法时我找到了<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1hJADzpEeG">这个视频</a>，一切迎刃而解，帖子最后我只想说，小孩哥nb！</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a><a class="post-meta__tags" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a></div><div class="post-share"><div class="social-share" data-image="/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/07/17/%E5%81%9A%E7%B3%BB%E7%BB%9F%E5%B7%B2%E5%A6%82%E5%96%9D%E6%B0%B4%E8%88%AC%E7%AE%80%E5%8D%95%E4%BA%86/" title="做系统已如喝水般简单了"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2026/07/17/%E5%81%9A%E7%B3%BB%E7%BB%9F%E5%B7%B2%E5%A6%82%E5%96%9D%E6%B0%B4%E8%88%AC%E7%AE%80%E5%8D%95%E4%BA%86/cover.jpg" onerror="onerror=null;src='/imges/live.png'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">做系统已如喝水般简单了</div></div><div class="info-2"><div class="info-item-1">没啥用但一天不折腾我浑身难受起因是刷视频看到steam出了一个新主机：steam machine。搭载steamOS系统，本来没啥看看图一乐（我又买不起）但视频提到v社开放了steamOS的安装，诶↗那我肯定得尝尝咸淡，然后去翻阅了官方文章发现只支持amd平台。。不行我不服问ai有没有什么别的办法折腾到我Intel平台的机器上，他说未来两年v社才会陆续支持intel及nvidia，我去才知道还不支持n卡。但他还提供了平替方案：bazzite，一款仿steamOS基于Linux的主机操作系统，那还说啥了开整。 双系统实现做系统应该对我来说不难，之前折腾过win11退win10，但双系统头一次，总结我找到的教程：  做系统一定得有硬盘装吧，嗯那么我们进入微pe（其实可以在win系统里下diskgenius直接用但官网只提供百度网盘下载，我死也不用百度网盘）在微pe里进入diskgenius，右击空间富裕的分区→拆分分区→输入你分配给bazzite的空间大小→读条结束后右击新分区再分出一个1gb大小的分区用来挂载&#x2F;boot，然后分别右击那两个新分区→删除分区→创建新分区选择L...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/07/17/%E5%81%9A%E7%B3%BB%E7%BB%9F%E5%B7%B2%E5%A6%82%E5%96%9D%E6%B0%B4%E8%88%AC%E7%AE%80%E5%8D%95%E4%BA%86/" title="做系统已如喝水般简单了"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2026/07/17/%E5%81%9A%E7%B3%BB%E7%BB%9F%E5%B7%B2%E5%A6%82%E5%96%9D%E6%B0%B4%E8%88%AC%E7%AE%80%E5%8D%95%E4%BA%86/cover.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-17</div><div class="info-item-2">做系统已如喝水般简单了</div></div><div class="info-2"><div class="info-item-1">没啥用但一天不折腾我浑身难受起因是刷视频看到steam出了一个新主机：steam machine。搭载steamOS系统，本来没啥看看图一乐（我又买不起）但视频提到v社开放了steamOS的安装，诶↗那我肯定得尝尝咸淡，然后去翻阅了官方文章发现只支持amd平台。。不行我不服问ai有没有什么别的办法折腾到我Intel平台的机器上，他说未来两年v社才会陆续支持intel及nvidia，我去才知道还不支持n卡。但他还提供了平替方案：bazzite，一款仿steamOS基于Linux的主机操作系统，那还说啥了开整。 双系统实现做系统应该对我来说不难，之前折腾过win11退win10，但双系统头一次，总结我找到的教程：  做系统一定得有硬盘装吧，嗯那么我们进入微pe（其实可以在win系统里下diskgenius直接用但官网只提供百度网盘下载，我死也不用百度网盘）在微pe里进入diskgenius，右击空间富裕的分区→拆分分区→输入你分配给bazzite的空间大小→读条结束后右击新分区再分出一个1gb大小的分区用来挂载&#x2F;boot，然后分别右击那两个新分区→删除分区→创建新分区选择L...</div></div></div></a><a class="pagination-related" href="/2026/06/17/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/" title="Hexo的搭建记录"><img class="cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2026/06/17/Hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95/cover.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-17</div><div class="info-item-2">Hexo的搭建记录</div></div><div class="info-2"><div class="info-item-1">只将自己研究的部分的代码呈现出来了起因是找资源发现一位up将资源存在个人博客觉着新奇就想自己来试试然后就一发不可收拾up的blog莱姆Lime个人认为非常精美，甚至不敢相信是用hexo框架搭建的，而其GitHub主页LimeBlogs个性签还写道“业余爱好者，非码农”也足以看出其技术之深了 第一位恩师“枸杞加水”通过up的视频正式入门搭建Hexo,这位up的主页我也添加到友链了我会记住他的 第二位恩师“–Fomalhaut”他的视频将一系列的教程打包成套非常详细，可以说本站大部分的开发都由其指导，当然他的主页也在友链 之后的开发涉及一些计算机语言，对众的视频也难以支撑我解决一些细小问题我直接就掏出我的deepseek，用的时候很难不笑出声，本地编写保存报错，直接把报错信息复制粘贴，拿到解决代码再复制粘贴。。当然在部署评论时我也会独自钻研产品说明一些问题也可以通过说明书解决，虽然大多还是复制粘贴。。通过部署评论我也学习了一些域名相关领域的知识（本来不想买域名，想直接裸奔网站的奈何部署评论的服务器域名被墙了只能买了）了解了cf‘cloudflare’的伟大，域名的投资性，ipv6等等...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0%EF%BC%9Aroot-%E2%80%94%E2%80%94%E5%AE%89%E5%8D%93%E6%9C%80%E9%AB%98%E6%9D%83%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">起因：root ——安卓最高权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7%E5%85%A5%E5%8F%8B%E5%95%86%E7%9A%84ROM"><span class="toc-number">2.</span> <span class="toc-text">刷入友商的ROM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B7%E5%85%A5root%E6%9D%83%E9%99%90"><span class="toc-number">3.</span> <span class="toc-text">刷入root权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%8A%9B%E6%9C%BA%EF%BC%88hyper-1%EF%BC%89%E8%A7%A3%E9%94%81"><span class="toc-number">4.</span> <span class="toc-text">主力机（hyper 1）解锁</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url(/2026/08/08/%E5%85%A5%E5%9D%91%E6%90%9E%E6%9C%BA/cover.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By wyin404</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></span></div><div class="footer_custom_text"><span id="realtime_duration"></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><!-- ===== 【插入点1】字体切换按钮放在隐藏设置里 =====--><!-- 这样字体按钮会出现在齿轮点击后的面板中--><div class="rightside-item"><a id="font-toggle-btn" title="字体切换"><i class="fas fa-font"></i></a></div><!-- ===== 字体选择面板（放在隐藏设置内部，随面板显示） =====--><div id="font-panel" style="display:none"><div class="font-option" data-font="default" onclick="setFont(&quot;default&quot;)"><span>默认</span><span class="font-sample">文a</span></div><div class="font-option" data-font="custom" onclick="setFont(&quot;custom&quot;)"><span>圆滑</span><span class="font-sample">文a</span></div></div></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+  const isShuoshuo = GLOBAL_CONFIG_SITE.pageType === 'shuoshuo'
+  const option = {"locale":{"placeholder":"主人~留下些什么吧 ₍^ >ヮ<^₎ .ᐟ.ᐟ喵！","nick":"你的昵称：","mail":"你的邮箱：","link":"你的网址："}}
+
+  const destroyWaline = ele => ele.destroy()
+
+  const initWaline = (Fn, el = document, path = window.location.pathname) => {
+    const waline = Fn({
+      el: el.querySelector('#waline-wrap'),
+      serverURL: 'https://talk.wyin5100.top',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      comment: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || path
+    })
+
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyWaline = () => {
+        destroyWaline(waline)
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+  }
+
+  const loadWaline = (el, path) => {
+    if (initFn) initWaline(initFn, el, path)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client@3.15.2/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn, el, path)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if (isShuoshuo) {
+    'Waline' === 'Waline'
+      ? window.shuoshuoComment = { loadComment: loadWaline } 
+      : window.loadOtherComment = loadWaline
+    return
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script data-pjax src="/js/home-swiper.js"></script><script src="/js/clock.js"></script><script src="/js/change.js"></script><script src="/js/loader.js"></script><script src="/js/title.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/dayjs.min.js"></script><script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.7/plugin/duration.min.js"></script><script src="/js/realtime.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/metingjs/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start -->
+    <script src="/js/gallery.js" async></script>
+<div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__fadeIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '500ms');
+    arr[i].setAttribute('data-wow-offset', '80');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__fadeIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
